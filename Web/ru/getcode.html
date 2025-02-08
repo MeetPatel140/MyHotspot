@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MyHotspot-Получить PIN-код</title>
+       <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.3.pack.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.3.css" media="screen" />
+
+        <script type="text/javascript"  src="lib-1-4-3.js"></script>
+
+        <link rel="stylesheet"  type="text/css"  href="style.css" />
+
+<script type="text/javascript">
+
+         /*<![CDATA[*/
+
+
+
+function ShowErrorMsg(Error)
+
+{
+
+        $(document).ready(function() {
+          document.getElementById("ErrorMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'none';
+          document.getElementById("ErrorMsg").style.display = 'block';
+       });
+ }
+
+function ShowInfoMsg(Info)
+
+{
+        $(document).ready(function() {
+          document.getElementById("InfoMsg").firstChild.data=document.getElementById(Info+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'block';
+       });
+ }
+
+
+ function AccountCheck()
+  {
+   var chk = false;
+   if ( (document.getElementById("_countrycode").value=='')
+             || (document.getElementById("_localphone").value=='') )
+    {
+    ShowErrorMsg('InvalidPhone') ;
+
+    }
+   
+   else
+   chk=true;
+   return(chk);
+  }
+
+
+  function PhoneChange()
+  {
+     var chk = true;
+    $(document).ready(function() {
+
+        document.getElementById("_phone").firstChild.data="+"+document.getElementById("_countrycode").value+" "
+                                                            +document.getElementById("_localphone").value;
+
+       });
+
+   return(chk);
+  }
+
+   //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+    /*]]>*/
+
+
+
+        </script>
+</head>
+
+<body>
+<div class="AccountHeaderPage">
+ <div class="FloatingTop">
+  <img  src="img\logo.png"  alt="" />
+ </div>
+<div class="FloatingTop">
+     Получить PIN-Code
+</div>
+<div class="FloatingTop AccountPage" style="font-weight:normal">
+    Пожалуйста, введите код страны (Пример: 44) и ваш номер мобильного телефона (пример: 07123456 или 7123456), чтобы получить свой PIN-Code по SMS.
+</div>
+</div>
+
+<noscript>
+<div  class="AccountMsgPage AccountWarningPage">
+    На этой странице должен быть. Пожалуйста, включите JavaScript в Вашем браузере.
+</div>
+</noscript>
+
+<div  class="AccountMsgPage AccountInfoPage" id="InfoMsg" style="display:None">
+ &nbsp;
+</div>
+
+
+<div  class="AccountMsgPage AccountErrorPage" id="ErrorMsg" style="display:None">
+ &nbsp;
+</div>
+
+<div class="AccountPage">
+  <form  action="./" method="post"  onsubmit="return AccountCheck();">
+ <div> <input type="hidden" name="_action" value="getcode" /></div>
+   <table>
+     
+      <tr>
+          <td style="width:30%;"><label >код страны</label></td>
+          <td><input tabindex="2"  name="_countrycode"  id="_countrycode" value="" autocomplete="off" type="text"  style="width:20%;height:16px;" onkeyup="PhoneChange();" onchange="PhoneChange();" /></td>
+
+     </tr>
+
+     <tr>
+         <td><label >номер телефона</label></td>
+         <td><input tabindex="3"  name="_localphone"  id="_localphone"  value="" autocomplete="off" type="text"  style="width:60%;height:16px;" onkeyup="PhoneChange();" onchange="PhoneChange();"/></td>
+      </tr>
+
+       <tr>
+         <td><label >&nbsp;</label></td>
+         <td><label  class="PhoneDisplay" id="_phone"   style="width:99%;">+</label></td>
+      </tr>
+           <tr>
+         <td><label >Код безопасности </label></td>
+
+         <td>
+         <div class="floatLeft" style="width:30%;">
+           <img id="captcha" src="captcha.php" alt="CAPTCHA" style="width:36;height:118" />
+         </div>
+         <div class="floatRight" style="width:65%;padding-top:20px">
+           <a   href="#" onclick="document.getElementById('captcha').src = 'captcha.php' + Math.random(); return false">новый код безопасности</a>
+         </div>
+         </td>
+
+
+     </tr>
+     <tr>
+         <td ><label >Повторите код безопасности</label></td>
+         <td><input tabindex="20"  name="_captcha"  id="_captcha" value="" autocomplete="off" type="text"  style="width:60%;height:16px;"/></td>
+
+     </tr>
+
+    
+     <tr>
+         <td><label >&nbsp;</label></td>
+         <td ><input  class="LoginBtn" value="послать" type="submit" /></td>
+
+     </tr>
+   </table>
+   </form>
+
+</div>
+
+
+<div style="display: none;">
+
+   <p id="InvalidUsernameMsg">Введенные имя пользователя является недействительным. Пожалуйста, попробуйте еще раз.</p>
+   <p id="InvalidPasswordMsg">Введенный пароль недействителен. Пожалуйста, попробуйте еще раз.</p>
+   <p id="InvalidCodeMsg">Введенные Prepaid-код является недействительным. Пожалуйста, попробуйте еще раз.</p>
+   <p id="NoMinCreditMsg">Ваша кредитная недостаточно. Пожалуйста, добавьте кредита.</p>
+   <p id="DisabledUseraccountMsg">Учетная запись отключена. Пожалуйста, свяжитесь с обслуживающим персоналом</p>
+   <p id="ExpiredUseraccountMsg">Ваш профиль просрочен. Пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="UseraccountInUseMsg">Учетная запись в настоящее время активен в одном из терминалов. Пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="DisabledCodeaccountMsg">Введенные Prepaid-код отключен. Пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="ExpiredCodeaccountMsg">Введенные Prepaid-кода истек. Пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="CodeaccountInUseMsg">Введенные Prepaid-код в настоящее время активен в одном из терминалов. Пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="ZeroCodeCreditMsg">код-пополнение использовали.</p>
+   <p id="UsernameExistsMsg">Это имя пользователя уже занято. Пожалуйста, попробуйте другое имя пользователя.</p>
+   <p id="DisabledServiceMsg">К сожалению, эта услуга в настоящее время недоступен. Пожалуйста, попробуйте позже.</p>
+   <p id="PayPalyLoginErrMsg">Произошла ошибка при попытке войти пожалуйста, свяжитесь с обслуживающим персоналом.</p>
+   <p id="InvalidPasswordConfirmMsg">Оба пароля должны быть одинаковыми. Пожалуйста, введите их еще раз.</p>
+   <p id="InvalidNewUsernameMsg">Введенные имя пользователя пуст. Пожалуйста, введите имя пользователя.</p>
+   <p id="InvalidNewPasswordMsg">введенный пароль пустой. Пожалуйста, введите пароль.</p>
+   <p id="SuccessAddMoneyMsg">Спасибо. Кредит на сумму предоплаты-код был добавлен к вашему счету.</p>
+   <p id="SuccessCreateAccountMsg">Мы благодарим вас за ваше доверие. Ваша учетная запись успешно создана.</p>
+   <p id="SuccessChangePasswordMsg">Ваш пароль был успешно изменен.</p>
+   <p id="InvalidPhoneMsg">Код страны или номер мобильного телефона является недействительным. Пожалуйста, попробуйте еще раз.</p>
+   <p id="InvalidFormDataMsg">Вы должны заполнить все поля формы</p>
+   <p id="IncorrectCaptchaMsg">Вам необходимо ввести правильный код безопасности.</p>
+
+</div>
+
+
+</body>
+</html>

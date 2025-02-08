@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<title>MyHotspot-Obter um código pré-pago</title>
+<script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+<link rel="stylesheet"  type="text/css"  href="style-mobile.css" />
+<script type="text/javascript">
+        /*<![CDATA[*/
+
+
+
+function ShowErrorMsg(Error)
+
+{
+
+        $(document).ready(function() {
+          document.getElementById("ErrorMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = 'none';
+          document.getElementById("ErrorMsgDisplay").style.display = 'block';
+       });
+ }
+
+function ShowInfoMsg(Info)
+
+{
+        $(document).ready(function() {
+          document.getElementById("InfoMsg").firstChild.data=document.getElementById(Info+"Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = 'block';
+       });
+ }
+
+   function AccountCheck()
+  {
+   var chk = false;
+   if ( (document.getElementById("_countrycode").value=='')
+             || (document.getElementById("_localphone").value=='') )
+    {
+    ShowErrorMsg('InvalidPhone') ;
+
+    }
+
+   else
+   chk=true;
+   return(chk);
+  }
+
+
+  function PhoneChange()
+  {
+     var chk = true;
+    $(document).ready(function() {
+
+        document.getElementById("_phone").firstChild.data="+"+document.getElementById("_countrycode").value+" "
+                                                            +document.getElementById("_localphone").value;
+
+       });
+
+   return(chk);
+  }
+
+
+  //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+    /*]]>*/
+
+        </script>
+
+</head>
+<body>
+
+   <div class="wrap" >
+       <div class="PageTitle">
+         <div class="logo"><img src="img/logo-mobile.png" alt=""/></div>
+         <div class="logocaption">Obter PIN-Code por SMS</div>
+       </div>
+
+       <div class="NewPage" id="ErrorMsgDisplay" style="display: none;">
+         <div class="MessagePageLogo ErrorPage MessagePageText" id="ErrorMsg"> &nbsp; </div>
+       </div>
+
+       <div class="NewPage" id="WarningMsgDisplay" style="display: none;">
+         <div class="MessagePageLogo WarningPage MessagePageText" id="WarningMsg"> &nbsp; </div>
+       </div>
+
+      <div class="NewPage" id="InfoMsgDisplay" style="display: none;">
+        <div class="MessagePageLogo InfoPage MessagePageText" id="InfoMsg"> &nbsp; </div>
+      </div>
+
+      <noscript>
+        <div  class="NewPage">
+         <div class="MessagePageLogo WarningPage MessagePageText">Esta p&aacute;gina necessita do Javascript. Ative o JavaScript no seu navegador.</div>
+        </div>
+     </noscript>
+
+     <div class="NewPage">
+     <div class="PageInfoText">
+           Digite seu código de país (Exemplo: 44) e seu número de telefone móvel (Exemplo: 07123456 ou 7123456) para receber um código pré-pago por SMS.
+      </div>
+
+    <form  action="./" method="post"  onsubmit="return AccountCheck();">
+     <div> <input type="hidden" name="_action" value="getcode" /></div>
+       <div>
+          <label >Código do país</label>
+          <input  class="Width50"   tabindex="2"  name="_countrycode"  id="_countrycode" value="" autocomplete="off" type="text"   onkeyup="PhoneChange();" onchange="PhoneChange();" />
+        </div>
+        <div>
+         <label >Número do telefone <span class="PhoneDisplay"   id="_phone" >+</span></label>
+         <input tabindex="3"  name="_localphone"  id="_localphone"  value="" autocomplete="off" type="text"  onkeyup="PhoneChange();" onchange="PhoneChange();"/>
+       </div>
+
+      <div>
+    <label >código de confirmação </label>
+    <img id="captcha" src="captcha.php" alt="CAPTCHA"  />
+    <div><a  class="arrow_link"   href="#" onclick="document.getElementById('captcha').src = 'captcha.php' + Math.random(); return false">Carregar nova imagem</a></div>
+</div>
+ <div>
+    <label >Digite código de confirmação</label>
+    <input tabindex="20"  name="_captcha"  id="_captcha" value="" autocomplete="off" type="text" />
+ </div>
+
+
+      <div>
+         <input   value="Enviar" type="submit" />
+      </div>
+   </form>
+  </div>
+ </div>
+
+
+<div style="display: none;">
+
+   <p id="InvalidUsernameMsg">O nome de usu&aacute;rio digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+   <p id="InvalidPasswordMsg">A senha digitada &eacute; inv&aacute;lida. Por favor, tente de novo.</p>
+   <p id="InvalidCodeMsg">O C&oacute;digo pr&eacute;-pago digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+   <p id="NoMinCreditMsg">O seu cr&eacute;dito n&atilde;o &eacute; suficiente. Por favor, adicione cr&eacute;dito.</p>
+   <p id="DisabledUseraccountMsg">Sua conta est&aacute; desativada. Entre em contato com a equipe de servi&ccedil;o</p>
+   <p id="ExpiredUseraccountMsg">Sua conta expirou. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="UseraccountInUseMsg">Sua conta est&aacute; atualmente ativa em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="DisabledCodeaccountMsg">O C&oacute;digo pr&eacute;-pago digitado est&aacute; desativado. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="ExpiredCodeaccountMsg">O C&oacute;digo Pr&eacute;-pago digitado &eacute; expirado. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="CodeaccountInUseMsg">O C&oacute;digo Pr&eacute;-pago digitado est&aacute; atualmente ativo em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="ZeroCodeCreditMsg">O C&oacute;digo de cr&eacute;dito foi utilizado.</p>
+   <p id="UsernameExistsMsg">Esse nome de usu&aacute;rio j&aacute; existe. Por favor tente um nome de usu&aacute;rio diferente.</p>
+   <p id="DisabledServiceMsg">Desculpe, este servi&ccedil;o n&atilde;o est&aacute; dispon&iacute;vel no momento. Por favor, tente de novo mais tarde.</p>
+   <p id="PayPalyLoginErrMsg">Um erro ocorreu ao tentar para entrar. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="InvalidPasswordConfirmMsg">As duas senhas devem ser iguais.</p>
+   <p id="InvalidNewUsernameMsg">Nome de usuário está vazio ou inválido.</p>
+   <p id="InvalidNewPasswordMsg">Verificando se O campo Senha está vazio.</p>
+   <p id="SuccessAddMoneyMsg">Obrigado. O crédito em seu Código pré-pago foi adicionado à sua conta.</p>
+   <p id="SuccessCreateAccountMsg">Obrigado. Sua conta foi criada com sucesso.</p>
+   <p id="SuccessChangePasswordMsg">Sua senha foi alterada com sucesso.</p>
+   <p id="InvalidPhoneMsg">O código de país ou número do telefone digitado é inválido. Por favor, tente de novo</p>
+   <p id="InvalidFormDataMsg">Você deve preencher todos os campos do formulário</p>
+   <p id="IncorrectCaptchaMsg">O código de segurança está incorreto. Por favor, tente de novo.</p>
+
+</div>
+</body>
+</html>

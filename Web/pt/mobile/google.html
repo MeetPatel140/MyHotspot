@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<title>MyHotspot - Seu login</title>
+<script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+<link rel="stylesheet"  type="text/css"  href="style-mobile.css" />
+<script type="text/javascript">
+        /*<![CDATA[*/
+
+
+
+function ShowErrorMsg(Error)
+
+{
+
+        $(document).ready(function() {
+          document.getElementById("ErrorMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = 'none';
+          document.getElementById("ErrorMsgDisplay").style.display = 'block';
+       });
+ }
+
+function ShowInfoMsg(Info)
+
+{
+        $(document).ready(function() {
+          document.getElementById("InfoMsg").firstChild.data=document.getElementById(Info+"Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = 'block';
+       });
+ }
+
+  var pp_MinAmount = 100;
+   var pp_MaxAmount =10000000;
+   var pp_Step = 50;
+   var pp_DecimalSeperator =".";
+
+  function GetAmountString(aCentsAmount) {
+     if(isNaN(aCentsAmount))
+      {
+       return "1.00"
+      }
+      else
+      {
+       var str =(aCentsAmount / 100) + ((aCentsAmount % 100 == 0) ? ".0" : "") + ((aCentsAmount % 10 == 0) ? "0" : "");
+
+       return str.replace(".", pp_DecimalSeperator);
+      }
+   }
+
+  function SetPayPalAmount(aAmount){
+     document.getElementById("PPamount").value=(isNaN(aAmount) ? "100":aAmount);
+     document.getElementById("DisplayAmount").firstChild.data=GetAmountString(aAmount);
+   }
+
+  function OnPPBtnClick(btn) {
+        var amount=100;
+       if (btn==1)
+        {
+        amount = Math.min(parseInt(document.getElementById("PPamount").value) + pp_Step, pp_MaxAmount) ;
+        }
+       else if (btn==2)
+       {
+        amount = Math.max(parseInt(document.getElementById("PPamount").value) - pp_Step, pp_MinAmount);
+       }
+
+       SetPayPalAmount(amount);
+
+      }
+    
+     function toggleCheckbox(element)
+    {
+     document.getElementById("_freewifibtn").disabled = !element.checked;
+    }
+
+   function DisplayFlatTarif()
+                          {
+
+                              $(document).ready(function() {
+                                    try
+                                   {
+                                    document.getElementById("_flatprice").firstChild.data='';
+                                    var PricingIndex=document.getElementById("_flatpricing").options[document.getElementById("_flatpricing").selectedIndex].value;
+                                    document.getElementById("_flatprice").firstChild.data=document.getElementById("price"+"_"+PricingIndex).firstChild.data;
+                                    }
+                                    catch(err)
+                                   {
+                                   }
+
+                              });
+                          }
+
+
+  $(document).ready(function() {
+                           
+                           SetPayPalAmount(pp_MinAmount);
+                          });
+
+                         //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+    /*]]>*/
+
+        </script>
+
+</head>
+<body>
+  
+   <div class="wrap" >
+       <div class="PageTitle">
+         <div class="logo"><img src="img/logo-small.png" alt=""/></div>
+         <div class="logocaption">True Software Hotspot</div>
+         <div class="PopupMenuBar" style="margin-top:-3px;margin-bottom:6px">
+     <div class="PopupMenu">
+      <a  class="PopupMenuItem"  style="background-image:url('img/pt.png');" >Português</a>
+
+      <div  class="PopupSubItems Hidden" >
+       <ul >
+          <li >
+     <a  style="background-image:url('img/de.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=de">Deutsch</a>
+ </li>
+
+<li >
+     <a  style="background-image:url('img/en.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=en">English</a>
+ </li>
+
+<li >
+     <a  style="background-image:url('img/es.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=es">Español</a>
+ </li>
+
+<li >
+     <a  style="background-image:url('img/fr.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=fr">Français</a>
+ </li>
+
+<li >
+     <a  style="background-image:url('img/ru.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=ru">Русский</a>
+ </li>
+
+
+       </ul>
+    </div>
+  </div>
+
+<script type="text/javascript">
+         /*<![CDATA[*/
+      $(document).ready(function() {
+          $('.PopupMenuItem').click(function(){
+                $(this).parent().find('.PopupSubItems').toggleClass('Hidden');
+               });
+         $('.PopupMenu').mouseleave(function() {
+            $(this).find('.PopupSubItems').addClass('Hidden');
+          });
+        });
+      /*]]>*/
+</script>
+</div>
+
+       </div>
+
+       <div class="NewPage" id="ErrorMsgDisplay" style="display: none;">
+         <div class="MessagePageLogo ErrorPage MessagePageText" id="ErrorMsg"> &nbsp; </div>
+       </div>
+
+       <div class="NewPage" id="WarningMsgDisplay" style="display: none;">
+         <div class="MessagePageLogo WarningPage MessagePageText" id="WarningMsg"> &nbsp; </div>
+       </div>
+
+      <div class="NewPage" id="InfoMsgDisplay" style="display: none;">
+        <div class="MessagePageLogo InfoPage MessagePageText" id="InfoMsg"> &nbsp; </div>
+      </div>
+
+      <noscript>
+        <div  class="NewPage">
+         <div class="MessagePageLogo WarningPage MessagePageText">Esta p&aacute;gina necessita do Javascript. Ative o JavaScript no seu navegador.</div>
+        </div>
+     </noscript>
+
+      <div class="PageLogin">
+       <div class="PageLoginHeader">
+            Conta de usu&aacute;rio
+       </div>
+       <div class="PageLoginLogo PageLoginLogoUser" >
+           <div class="PageLoginLogoText">
+                Voc&ecirc; pode fazer login usando seu nome de usu&aacute;rio e senha:
+           </div>
+       </div>
+       <form  action="./"  method="post" >
+             <div><input type="hidden" name="_action" value="userlogin" /></div>
+                <div>
+                  <label >Nome de usu&aacute;rio:</label>
+                  <input tabindex="1"  name="_user"  value="" autocomplete="off" type="text" />
+               </div>
+              <div>
+                  <label>Senha:</label>
+                  <input tabindex="2"   name="_pass"  autocomplete="off" type="password" />
+              </div>
+              <div>
+                  <input tabindex="3"  value="Login" type="submit"  />
+              </div>
+
+       </form>
+
+       <div class="services">
+   <a class="service default" href="changepassword.html"><span class="logo">&nbsp;</span>Alterar sua senha</a>
+
+   <a class="service default" href="addmoney.html"><span class="logo">&nbsp;</span>Adicionar crédito</a>
+
+   <a class="service default" href="createaccount.html"><span class="logo">&nbsp;</span>Criar uma conta de usuário</a> 
+
+   <a class="service default" href="userflat.html"><span class="logo">&nbsp;</span>Comprar Flatrate</a>
+
+   
+</div>
+
+</div>
+
+      <div class="PageLogin">
+       <div class="PageLoginHeader">
+             C&oacute;digo Pr&eacute;-pago
+       </div>
+       <div class="PageLoginLogo PageLoginLogoCode" >
+           <div class="PageLoginLogoText">
+                Voc&ecirc; pode fazer login usando o seu C&oacute;digo Pr&eacute;-pago v&aacute;lido:
+           </div>
+       </div>
+       <form  action="./"  method="post" >
+              <div><input type="hidden" name="_action" value="codelogin" /></div>
+                <div>
+                  <label >C&oacute;digo Pr&eacute;-pago:</label>
+                  <input tabindex="4"  name="_code"   value="" autocomplete="off" type="text"/>
+               </div>
+
+              <div>
+                  <input tabindex="5"  value="Login" type="submit"  />
+              </div>
+
+       </form>
+
+       <div class="services">
+         <a class="service default" href="codeflat.html"><span class="logo">&nbsp;</span>Comprar Flatrate</a>
+
+         <a class="service default" href="getcode.html"><span class="logo">&nbsp;</span>Obter PIN-Code por SMS</a> 
+
+</div>
+
+</div>
+
+      <div class="PageLogin">
+       <div class="PageLoginHeader">
+             WiFi grátis
+       </div>
+       <div class="PageLoginLogo PageLoginLogoFreeWifi" >
+           <div class="PageLoginLogoText">
+                Você pode fazer login grátis a aceitar os nossos Termos de Uso:
+           </div>
+       </div>
+        <form  action="./"  method="post" >
+        <div><input type="hidden" name="_action" value="freelogin" /></div>
+
+           <div class="FreeWifiTaC">
+            <table>
+             <tr>
+             <td style="width:1px">
+              <input type="checkbox" onchange="toggleCheckbox(this)"/>
+             </td>
+
+              <td style="padding-left:5px">
+                Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos <a href="termsofuse.html">Termos de Uso</a>
+              </td>
+             </tr>
+            </table>
+           </div>
+            <div>
+              <input tabindex="7"  id="_freewifibtn" value="Login" type="submit" disabled />
+            </div>
+
+       </form>
+</div>
+
+       
+      <div class="PageLogin">
+  <div class="PageLoginHeader">
+       PayPal
+  </div>
+  <div class="PageLoginLogo PageLoginLogoPayPal" >
+       <div class="PageLoginLogoText">
+        Por favor insira o valor desejado e clique no bot&atilde;o Login.
+       </div>
+  </div>
+ <div class="DisplayPP">
+   <label>Valor:</label>
+      <table>
+       <tr>
+        <td >
+          <div class="DisplayC" >€</div>
+          <div class="DisplayM" id="DisplayAmount">1.00</div>
+        </td>
+        <td style="width:0.1em;height:0.1em">
+          <div class="DisplayPPBtns">
+            <Button  id="DisplayUpBtn"  onclick="OnPPBtnClick(1)" type="button">&#x25B2;</Button>
+          </div>
+        </td>
+        <td  style="width:0.1em;height:0.1em">
+          <div class="DisplayPPBtns">
+           <Button  id="DisplayDownBtn" onclick="OnPPBtnClick(2)"  type="button">&#x25BC;</Button>
+          </div>
+        </td>
+       </tr>
+      </table>
+ </div>
+ <form  action="./"  method="post" >
+  <input type="hidden" name="_action" value="pplogin" />
+  <input id="PPamount" type="hidden" name="_amount" value="100" />
+  <div>
+   <input tabindex="8" value="Login" type="submit"  />
+  </div>
+ </form>
+</div>
+
+      
+      <div class="PageLogin PageFreeLinks">
+  <div class="PageLoginHeader">
+       Websites gr&aacute;tis
+  </div>
+  <div class="PageLoginLogo PageLinksLogo" >
+       <div class="PageLoginLogoText">
+            Voc&ecirc; pode usar os seguintes sites de gra&ccedil;a:
+       </div>
+  </div>
+
+  <ul class="menu">
+    <li><a  href="http://myhotspot-software.com">MyHotspot Software</a></li> 
+
+  </ul>
+</div>
+
+      <div class="NewPage Footer">
+      Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos <a href="termsofuse.html">Termos de Uso</a>
+</div>
+
+
+   </div>
+
+  <div style="display: none;">
+     <p id="InvalidUsernameMsg">O nome de usu&aacute;rio digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+     <p id="InvalidPasswordMsg">A senha digitada &eacute; inv&aacute;lida. Por favor, tente de novo.</p>
+     <p id="InvalidCodeMsg">O C&oacute;digo pr&eacute;-pago digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+     <p id="NoMinCreditMsg">O seu cr&eacute;dito n&atilde;o &eacute; suficiente. Por favor, adicione cr&eacute;dito.</p>
+     <p id="DisabledUseraccountMsg">Sua conta est&aacute; desativada. Entre em contato com a equipe de servi&ccedil;o</p>
+     <p id="ExpiredUseraccountMsg">Sua conta expirou. Entre em contato com a equipe de servi&ccedil;o.</p>
+     <p id="UseraccountInUseMsg">Sua conta est&aacute; atualmente ativa em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+     <p id="DisabledCodeaccountMsg">O C&oacute;digo pr&eacute;-pago digitado est&aacute; desativado. Entre em contato com a equipe de servi&ccedil;o.</p>
+     <p id="ExpiredCodeaccountMsg">O C&oacute;digo Pr&eacute;-pago digitado &eacute; expirado. Entre em contato com a equipe de servi&ccedil;o.</p>
+     <p id="CodeaccountInUseMsg">O C&oacute;digo Pr&eacute;-pago digitado est&aacute; atualmente ativo em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+     <p id="ZeroCodeCreditMsg">O C&oacute;digo de cr&eacute;dito foi utilizado.</p>
+     <p id="UsernameExistsMsg">Esse nome de usu&aacute;rio j&aacute; existe. Por favor tente um nome de usu&aacute;rio diferente.</p>
+     <p id="DisabledServiceMsg">Desculpe, este servi&ccedil;o n&atilde;o est&aacute; dispon&iacute;vel no momento. Por favor, tente de novo mais tarde.</p>
+     <p id="PayPalyLoginErrMsg">Um erro ocorreu ao tentar para entrar. Entre em contato com a equipe de servi&ccedil;o.</p>
+  </div>
+</body>
+</html>

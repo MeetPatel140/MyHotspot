@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <title>Your Login - OpenFreeWiFi</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <!-- Local Font Awesome -->
+  <link rel="stylesheet" href="../css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrap {
+      max-width: 480px;
+      width: 100%;
+      margin: 20px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .PageTitle {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .PageTitle .logo img {
+      max-width: 120px;
+      height: auto;
+      margin-bottom: 15px;
+      animation: bounce 5s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .logocaption {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 10px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .box-header {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    .box-header i {
+      margin-right: 10px;
+    }
+
+    .box-content {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    label i {
+      margin-right: 10px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #1e90ff;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+      box-shadow: 0 0 8px rgba(30, 144, 255, 0.5);
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #1e90ff, #00bfff);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button[type="submit"] i {
+      margin-right: 8px;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(135deg, #00bfff, #1e90ff);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      opacity: 1;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Background Animation */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.01%);
+      background-size: 20px 20px;
+      animation: moveBackground 5s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes moveBackground {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Error Icon Styling */
+    .fa-exclamation-circle {
+      color: #ff6347;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .services a {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .services a i {
+      margin-right: 8px;
+    }
+
+    .services a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu li {
+      margin-bottom: 10px;
+    }
+
+    .menu li a {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu li a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    }
+
+    /* Full-width Divider */
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+      margin: 10px 0;
+      width: calc(100% + 40px);
+      margin-left: -20px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("year").textContent = new Date().getFullYear();
+    });
+
+    function ShowErrorMsg(Error) {
+      $(document).ready(function () {
+        var errorMessage = $("#" + Error + "Msg").html();
+        $("#ErrorMsg").html(errorMessage);
+        $("#InfoMsgDisplay").hide();
+        $("#ErrorMsgDisplay").show().addClass('animated');
+      });
+    }
+
+    function ShowInfoMsg(Info) {
+      $(document).ready(function () {
+        $("#InfoMsg").text($("#" + Info + "Msg").text());
+        $("#InfoMsgDisplay").show().addClass('animated');
+      });
+    }
+
+    function AccountCheck() {
+      var chk = false;
+      if ($("#_username").val() === '') {
+        ShowErrorMsg('InvalidUsername');
+      } else if ($("#_prepaidcode").val() === '') {
+        ShowErrorMsg('InvalidCode');
+      } else {
+        chk = true;
+      }
+      return chk;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="PageTitle">
+      <div class="logo"><img src="img/logo-mobile.png" alt="OpenFreeWiFi Logo"></div>
+      <div class="logocaption">
+        <strong style="font-size: 1.5em;">Welcome to Wi-Fi</strong>
+        <br>
+        Get a <strong style="color: #ffd700;">1-Week Free Trial</strong> – Contact us on  
+        <a href="tel:+916353877251" style="outline: none; text-decoration: none; color: white;">WhatsApp: +91 6353877251</a> for assistance or to add balance.
+      </div>
+    </div>
+
+    <div class="NewPage hidden" id="ErrorMsgDisplay">
+      <div class="MessagePageLogo ErrorPage" id="ErrorMsg">&nbsp;</div>
+    </div>
+
+    <div class="NewPage hidden" id="WarningMsgDisplay">
+      <div class="MessagePageLogo WarningPage" id="WarningMsg">&nbsp;</div>
+    </div>
+
+    <div class="NewPage hidden" id="InfoMsgDisplay">
+      <div class="MessagePageLogo InfoPage" id="InfoMsg">&nbsp;</div>
+    </div>
+
+    <noscript>
+      <div class="NewPage">
+        <div class="MessagePageLogo WarningPage">This page needs JavaScript. Please enable JavaScript in your browser.</div>
+      </div>
+    </noscript>
+
+    <!-- Box 1: User Account Login -->
+    <div class="box">
+      <div class="box-header">
+        <i class="fas fa-user-circle"></i> Login (with your User Account)
+      </div>
+      <div class="divider"></div>
+      <div class="box-content">
+        <form action="./" method="post">
+          <input type="hidden" name="_action" value="userlogin">
+          <div style="margin-top: 15px;">
+            <label for="_user">
+              <i class="fas fa-user"></i> Username:
+            </label>
+            <input type="text" id="_user" name="_user" placeholder="Enter your username" autocomplete="on" autofocus="on" tabindex="1">
+          </div>
+          <div>
+            <label for="_pass">
+              <i class="fas fa-lock"></i> Password:
+            </label>
+            <input type="password" id="_pass" name="_pass" placeholder="Enter your password" autocomplete="on" tabindex="2">
+          </div>
+          <div>
+            <button type="submit" tabindex="3">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Box 2: Voucher-Code Login -->
+    <div class="box">
+      <div class="box-header">
+        <i class="fas fa-ticket-alt"></i> Login (with you Voucher-Code)
+      </div>
+      <div class="divider"></div>
+      <div class="box-content">
+        <form action="./" method="post">
+          <input type="hidden" name="_action" value="codelogin">
+          <div style="margin-top: 15px;">
+            <label for="_code">
+              <i class="fas fa-ticket"></i> Voucher-Code:
+            </label>
+            <input type="text" id="_code" name="_code" placeholder="Enter your Prepaid-Code" autocomplete="off" tabindex="4">
+          </div>
+          <div>
+            <button type="submit" tabindex="5">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Box 3: Free Websites to use Internet -->
+    <div class="box">
+      <div class="box-header">
+        <i class="fas fa-globe"></i> Free Websites to use Internet
+      </div>
+      <div class="divider"></div>
+      <div class="box-content">
+        <ul class="menu" style="margin-top: 15px;">
+          <li>
+            <a href="https://fusiontechlaboratories.in" tabindex="6">
+              <i class="fas fa-globe"></i> Visit our Company's Official Website: FusionTech Laboratories
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Box 4: Services -->
+    <div class="box">
+      <div class="box-header">
+        <i class="fas fa-cogs"></i> More Services
+      </div>
+      <div class="divider"></div>
+      <div class="box-content">
+        <div class="services" style="margin-top: 15px;">
+          <a class="service default" href="createaccount.html" tabindex="7">
+            <i class="fas fa-user-plus"></i> Create New Account
+          </a>
+          <a class="service default" href="changepassword.html" tabindex="8">
+            <i class="fas fa-key"></i> Change your Password
+          </a>
+          <a class="service default" href="addmoney.html" tabindex="9">
+            <i class="fas fa-wallet"></i><i class="fas fa-plus" style="font-size: 0.6em; margin-left: -7px; margin-bottom: 5px;"></i> Add Money
+          </a>
+          <a class="service default" href="userflat.html" tabindex="10">
+            <i class="fas fa-shopping-cart"></i> Buy Plan
+          </a>          
+        </div>
+      </div>
+    </div>
+
+    <!-- Box 5: Instructions -->
+<div class="box">
+  <div class="box-header">
+    <i class="fas fa-info-circle"></i> Instructions
+  </div>
+  <div class="divider"></div>
+  <div class="box-content">
+    <p>For any assistance, feel free to reach out:</p>
+    <ul>
+      <li>Contact us via <strong style="color: white; text-decoration: none; outline: none;">WhatsApp: <a href="tel:+916353877251" style="color: white; text-decoration: none; outline: none;">+91 6353877251</a></strong> for any internet-related issues.</li>
+      <li>Use the same number for account-related inquiries, including:</li>
+      <ul>
+        <li>Purchasing a new internet plan</li>
+        <li>Buying voucher codes</li>
+        <li>Any other account-related services</li>
+      </ul>
+    </ul>
+    <p>We’re here to help you stay connected!</p>
+  </div>
+</div>
+
+    <div class="footer">
+      &copy; <span id="year"></span> <a href="https://fusiontechlaboratories.in">FusionTech Laboratories</a>. All rights reserved.
+    </div>
+  </div>
+
+  <div class="hidden">
+    <p id="InvalidUsernameMsg"><i class="fas fa-exclamation-circle"></i> The entered username is invalid. Please try again.</p>
+    <p id="InvalidPasswordMsg"><i class="fas fa-exclamation-circle"></i> The entered password is invalid. Please try again.</p>
+    <p id="InvalidCodeMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is invalid. Please try again.</p>
+    <p id="NoMinCreditMsg"><i class="fas fa-exclamation-circle"></i> Your credit is not enough. Please add credit.</p>
+    <p id="DisabledUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is disabled. Please contact the service staff.</p>
+    <p id="ExpiredUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is expired. Please contact the service staff.</p>
+    <p id="UseraccountInUseMsg"><i class="fas fa-exclamation-circle"></i> Your account is currently active at one of the terminals. Please contact the service staff.</p>
+    <p id="DisabledCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is disabled. Please contact the service staff.</p>
+    <p id="ExpiredCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is expired. Please contact the service staff.</p>
+    <p id="CodeaccountInUseMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is currently active at one of the terminals. Please contact the service staff.</p>
+    <p id="ZeroCodeCreditMsg"><i class="fas fa-exclamation-circle"></i> The Code-credit is used up.</p>
+    <p id="UsernameExistsMsg"><i class="fas fa-exclamation-circle"></i> This username is already taken. Please try a different username.</p>
+    <p id="DisabledServiceMsg"><i class="fas fa-exclamation-circle"></i> Sorry, this service is not currently available. Please try again later.</p>
+    <p id="PayPalyLoginErrMsg"><i class="fas fa-exclamation-circle"></i> An error occurred while trying to log in. Please contact the service staff.</p>
+  </div>
+</body>
+</html>

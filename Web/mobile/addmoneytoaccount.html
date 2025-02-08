@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <title>Add Money</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="../css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrap {
+      max-width: 480px;
+      width: 100%;
+      margin: 20px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .PageTitle {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .PageTitle .logo img {
+      max-width: 120px;
+      height: auto;
+      margin-bottom: 15px;
+      animation: bounce 5s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .logocaption {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 10px;
+    }
+
+    .NewPage {
+      margin-bottom: 20px;
+    }
+
+    .MessagePageLogo {
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .ErrorPage {
+      background: rgba(255, 99, 71, 0.2);
+      border: 1px solid rgba(255, 99, 71, 0.5);
+      color: #ffffff;
+    }
+
+    .WarningPage {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid rgba(255, 193, 7, 0.5);
+      color: #ffc107;
+    }
+
+    .InfoPage {
+      background: rgba(30, 144, 255, 0.2);
+      border: 1px solid rgba(30, 144, 255, 0.5);
+      color: #1e90ff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form div {
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    label i {
+      margin-right: 10px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #1e90ff;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+      box-shadow: 0 0 8px rgba(30, 144, 255, 0.5);
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #1e90ff, #00bfff);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(135deg, #00bfff, #1e90ff);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.50);
+      opacity: 1; /* Ensures full opacity */
+    }
+    
+
+    .hidden {
+      display: none;
+    }
+
+    /* Background Animation */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.01%);
+      background-size: 20px 20px;
+      animation: moveBackground 5s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes moveBackground {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Error Icon Styling */
+    .fa-exclamation-circle {
+      color: #ff6347; /* Red color for error icons */
+      margin-right: 8px; /* Space between icon and text */
+      font-size: 16px; /* Adjust icon size */
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function ShowErrorMsg(Error) {
+      $(document).ready(function () {
+        // Get the error message with the icon
+        var errorMessage = $("#" + Error + "Msg").html();
+        // Set the HTML content of the error message container
+        $("#ErrorMsg").html(errorMessage);
+        // Show the error message container
+        $("#InfoMsgDisplay").hide();
+        $("#ErrorMsgDisplay").show().addClass('animated');
+      });
+    }
+
+    function ShowInfoMsg(Info) {
+      $(document).ready(function () {
+        $("#InfoMsg").text($("#" + Info + "Msg").text());
+        $("#InfoMsgDisplay").show().addClass('animated');
+      });
+    }
+
+    function AccountCheck() {
+      var chk = false;
+      if ($("#_username").val() === '') {
+        ShowErrorMsg('InvalidUsername');
+      } else if ($("#_prepaidcode").val() === '') {
+        ShowErrorMsg('InvalidCode');
+      } else {
+        chk = true;
+      }
+      return chk;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="PageTitle">
+      <div class="logo"><img src="img/logo-mobile.png" alt="MyHotspot Logo"></div>
+      <div class="logocaption">You can add money to your account's balance using a valid Voucher-Code.</div>
+    </div>
+
+    <div class="NewPage hidden" id="ErrorMsgDisplay">
+      <div class="MessagePageLogo ErrorPage" id="ErrorMsg">&nbsp;</div>
+    </div>
+
+    <div class="NewPage hidden" id="WarningMsgDisplay">
+      <div class="MessagePageLogo WarningPage" id="WarningMsg">&nbsp;</div>
+    </div>
+
+    <div class="NewPage hidden" id="InfoMsgDisplay">
+      <div class="MessagePageLogo InfoPage" id="InfoMsg">&nbsp;</div>
+    </div>
+
+    <noscript>
+      <div class="NewPage">
+        <div class="MessagePageLogo WarningPage">This page needs JavaScript. Please enable JavaScript in your browser.
+        </div>
+      </div>
+    </noscript>
+
+    <div class="NewPage">
+      <form action="./" method="post" onsubmit="return AccountCheck();">
+        <input type="hidden" name="_action" value="addmoneytoaccount">
+        <div>
+          <label for="_username">
+            <i class="fas fa-user"></i> Username
+          </label>
+          <input type="text" id="_username" name="_username" placeholder="Enter your username" autocomplete="on" autofocus="on" tabindex="1">
+        </div>
+        <div>
+          <label for="_password">
+            <i class="fas fa-lock"></i> Password
+          </label>
+          <input type="password" id="_password" name="_password" placeholder="Enter your password" autocomplete="on" tabindex="2">
+        </div>
+        <div>
+          <label for="_prepaidcode">
+            <i class="fas fa-ticket-alt"></i> Voucher-Code
+          </label>
+          <input type="text" id="_prepaidcode" name="_prepaidcode" placeholder="Enter your voucher code" autocomplete="off" tabindex="3">
+        </div>
+        <div>
+          <button type="submit">
+            <i class="fas fa-wallet"></i> Redeem
+          </button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+  <div class="hidden">
+    <p id="InvalidUsernameMsg"><i class="fas fa-exclamation-circle"></i> The entered Username is Invalid. Please try
+      again.</p>
+    <p id="InvalidPasswordMsg"><i class="fas fa-exclamation-circle"></i> The entered Password is Invalid. Please try
+      again.</p>
+    <p id="InvalidCodeMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is Invalid. Please try
+      again.</p>
+    <p id="NoMinCreditMsg"><i class="fas fa-exclamation-circle"></i> Your Account Balance is Low. Please add money to
+      your Account Balance.</p>
+    <p id="DisabledUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your Account is Disabled. Please contact <a
+        href="tel:+916353877251">+91 6353877251</a>.</p>
+    <p id="ExpiredUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your Account is Expired. Please contact <a
+        href="tel:+916353877251">+91 6353877251</a>.</p>
+    <p id="UseraccountInUseMsg"><i class="fas fa-exclamation-circle"></i> Your Account is currently Logged-in/Active in
+      other Devices. Please Logout from all Devices and wait for 10-Minutes. OR Please contact <a
+        href="tel:+916353877251">+91 6353877251</a> for immediate action.</p>
+    <p id="DisabledCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is Disabled.
+      Please contact <a href="tel:+916353877251">+91 6353877251</a>.</p>
+    <p id="ExpiredCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is Expired. Please
+      contact <a href="tel:+916353877251">+91 6353877251</a>.</p>
+    <p id="CodeaccountInUseMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is currently
+      Logged-in/Active in other Devices. Please Logout from all Devices and wait for 10-Minutes. OR Please contact <a
+        href="tel:+916353877251">+91 6353877251</a> for immediate action.</p>
+    <p id="ZeroCodeCreditMsg"><i class="fas fa-exclamation-circle"></i> This Voucher-Code's Money is Used. Please get
+      new Voucher-Code!</p>
+    <p id="UsernameExistsMsg"><i class="fas fa-exclamation-circle"></i> This Username is already taken. Please try a
+      different Username.</p>
+    <p id="DisabledServiceMsg"><i class="fas fa-exclamation-circle"></i> Sorry, this service is not currently available.
+      Please try again later.</p>
+    <p id="PayPalyLoginErrMsg"><i class="fas fa-exclamation-circle"></i> An error occurred while trying to Login. Please
+      contact <a href="tel:+916353877251">+91 6353877251</a>.</p>
+    <p id="InvalidPasswordConfirmMsg"><i class="fas fa-exclamation-circle"></i> Both Passwords must be same. Please
+      enter both of them same again.</p>
+    <p id="InvalidNewUsernameMsg"><i class="fas fa-exclamation-circle"></i> The entered Username is Empty. Please enter
+      a valid Username.</p>
+    <p id="InvalidNewPasswordMsg"><i class="fas fa-exclamation-circle"></i> The entered Password is empty. Please enter
+      a valid Password.</p>
+    <p id="SuccessAddMoneyMsg">Thank you. The Money from your Voucher-Code has been added to your Account's Balance.</p>
+    <p id="SuccessCreateAccountMsg">We thank you for your trust. Your Account has been Created Successfully.</p>
+    <p id="SuccessChangePasswordMsg">Your Password was Successfully Changed.</p>
+  </div>
+</body>
+
+</html>

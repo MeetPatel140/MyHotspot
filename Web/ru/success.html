@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MyHotSpot - Информация о сессии</title>
+        <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+        <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+        <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.3.pack.js"></script>
+        <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.3.css" media="screen" />
+        <link rel="stylesheet"   type="text/css"  href="style.css" />
+<script type='text/javascript'>
+             /*<![CDATA[*/
+
+            playing=false;
+            resttime=0;
+            //3D36830B-1286-459A-9A42-C266C95DE40C
+            var hcounter;
+
+            function LogoutCheck()
+            {
+             var chk = window.confirm(document.getElementById("LogoutCheckMsg").firstChild.data);
+             return(chk);
+            }
+            function startcountdown(){
+            if (playing==false){
+            playing=true;
+            hcounter=setInterval("timer();",1000)
+                               }
+            }
+            function stopcountdown(){
+             if (playing==true)
+               {
+                clearInterval(hcounter);
+                playing=false;
+               }
+            }
+            function timer(){
+            if(resttime>0){
+            resttime--;
+            rest=resttime;
+            hours=0;
+            minutes=0;
+            seconds=0;
+
+
+            if (rest >= 3600)
+              {
+               hours=Math.floor(rest/3600);
+               rest = rest-hours*3600;
+              }
+            if (rest >= 60)
+              {
+               minutes=Math.floor(rest/60);
+               rest = rest-minutes*60;
+              }
+            seconds=rest;
+
+            countdowntext="00:00:00";
+            if (hours < 10)
+             {
+             countdowntext = "0"+hours+":";
+             }
+
+            else
+              {
+             countdowntext = hours+":";
+              }
+            if (minutes < 10)
+             {
+
+             countdowntext += "0"+minutes+":";
+            }
+            else
+             {
+
+             countdowntext += minutes+":";
+             }
+
+            if (seconds < 10)
+             {
+             countdowntext += "0"+seconds;
+             }
+            else
+             {
+             countdowntext += seconds;
+             }
+
+
+
+
+
+            document.getElementById("TimeDisplayText").firstChild.data=countdowntext;
+
+            }else{
+              stopcountdown();
+
+            }
+            }
+
+
+        function setRandom(){
+           return Math.round(Math.random()*(122-48))+48;
+       }
+
+       function createguid(z){
+          var chars = new Array();
+          var x=0;
+          var y=0;
+
+          while(chars.length!=z){
+              var num =  setRandom();
+              if((num>47 && num<58) || (num>65 && num<91) || (num>96 && num<123)){
+                  if((num>47 && num<58)&&(x<2)){
+                      chars.push(String.fromCharCode(num));
+                      x++;
+                  }else if(y<z-2){
+                      chars.push(String.fromCharCode(num));
+                      y++;
+                  }
+              }
+          }
+          return chars.join('');
+       }
+
+      function loadXML(dname)
+          {
+
+          var xmlHttpObject = false;
+
+          if (typeof XMLHttpRequest != 'undefined')
+          {
+              xmlHttpObject = new XMLHttpRequest();
+          }
+
+          if (!xmlHttpObject)
+          {
+              try
+              {
+                  xmlHttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+              }
+              catch(e)
+              {
+                  try
+                  {
+                      xmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  catch(e)
+                  {
+                      xmlHttpObject = null;
+                  }
+              }
+          }
+          xmlHttpObject.open("GET",dname,false);
+          xmlHttpObject.send(null);
+          return xmlHttpObject.responseText;
+          }
+
+
+         var sURL = unescape(window.location.pathname);
+         function refresh()
+          {
+           xmldata=loadXML("getsessiondata"+createguid(9));
+           if (xmldata != "")
+           {
+           if (xmldata=="nosession")
+           {
+            window.location.href = sURL;
+           }
+            else
+           {
+            data=xmldata.split("|");
+
+            resttime=data[0];
+            document.getElementById("CostDisplayText").firstChild.data=data[1];
+            startcountdown();
+           }
+           }
+          }
+
+
+           $(document).ready(function() {
+
+                           $("#_addmoney").fancybox({
+                                'width'                                : '90%',
+                                'height'                        : '100%',
+                                'autoScale'                        : false,
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'type'                                : 'iframe'
+                        });
+                           setTimeout("refresh();", 1000);
+                           setInterval("refresh();",60000);
+                          // window.open('./counter.html', '_blank', 'width=350, height=200,scrollbars=no,toolbar=no, menubar=no');
+
+                                                      });
+
+         // startcountdown();
+
+         /*]]>*/
+</script>
+
+</head>
+<body>
+<div class="CounterHeaderPage">
+  <div>
+    <img  src="img\counter_logo.png" alt="" />
+  </div>
+ Вы вошли в систему успешно!
+ <div class="PopupMenuBar" style="margin-top:8px;margin-bottom:-6px">
+     <div class="PopupMenu">
+      <a  class="PopupMenuItem"  style="background-image:url('img/ru.png');" >Русский</a>
+
+      <div  class="PopupSubItems Hidden" >
+       <ul >
+          <li >
+     <a  style="background-image:url('img/de.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=de">Deutsch</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/en.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=en">English</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/es.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=es">Español</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/fr.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=fr">Français</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/pt.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=pt">Português</a>
+ </li>
+         
+
+
+       </ul>
+    </div>
+  </div>
+
+<script type="text/javascript">
+         /*<![CDATA[*/
+      $(document).ready(function() {
+          $('.PopupMenuItem').click(function(){
+                $(this).parent().find('.PopupSubItems').toggleClass('Hidden');
+               });
+         $('.PopupMenu').mouseleave(function() {
+            $(this).find('.PopupSubItems').addClass('Hidden');
+          });
+        });
+      /*]]>*/
+</script>
+</div>
+ 
+</div>
+<div class="CounterPage CounterPageHidden">
+ <div class="CounterDisplay TimerHidden TimerWidth100" >
+   <div class="CounterDisplayHeader">
+     Оставшееся
+   </div>
+    <div class="CounterDisplayData">
+     <div id="TimeDisplayText">
+       00:00:00
+      <!--0F9849BA-642A-4EB9-9F58-42CA4ED57A4A-->
+     </div>
+   </div>
+ </div>
+
+ <div class="CounterDisplay CreditHidden  CreditWidth100" >
+  <div class="CounterDisplayHeader">
+   Деньги
+   </div>
+    <div class="CounterDisplayData" >
+     <div id="CostDisplayText">
+        0.00 
+       <!--CF8448B8-5664-4800-B077-13F307816C7E-->
+    </div>
+   </div>
+
+ </div>
+</div>
+<div class="CounterFooterPage">
+    <table width="100%" >
+    <tr>
+     <td align="right">
+
+       <input  class="LoginBtn" value="Открыть счетчик" type="button"  onclick="window.open('./counter.html', '', 'width=350, height=200,scrollbars=no,toolbar=no, menubar=no'); return false;" />
+     </td>
+      <td align="center">
+      <form  action="./" method="post"  onsubmit="return LogoutCheck()">
+        <div><input type="hidden" name="_action" value="logout" /></div>
+        <input  class="LoginBtn" value="Выход"  type="submit" />
+     </form>
+    </td>
+    <td align="left">
+       <a  href="addmoney.html"  target="_blank"> <input  class="LoginBtn"  value="Пополнить счет" type="button"/></a>
+    
+</td>
+
+    </tr>
+   </table>
+</div>
+
+<div style="display: none;">
+   <p id="LogoutCheckMsg">Вы уверены, что хотите закрыть сессию?</p>
+</div>
+</body>
+</html>

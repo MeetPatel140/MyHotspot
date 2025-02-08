@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MyHotspot- Add Credit</title>
+       <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.3.pack.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.3.css" media="screen" />
+
+        <script type="text/javascript"  src="lib-1-4-3.js"></script>
+
+        <link rel="stylesheet"  type="text/css"  href="style.css" />
+
+<script type="text/javascript">
+
+         /*<![CDATA[*/
+
+
+
+function ShowErrorMsg(Error)
+
+{
+
+        $(document).ready(function() {
+          document.getElementById("ErrorMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'none';
+          document.getElementById("ErrorMsg").style.display = 'block';
+       });
+ }
+
+function ShowInfoMsg(Info)
+
+{
+        $(document).ready(function() {
+          document.getElementById("InfoMsg").firstChild.data=document.getElementById(Info+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'block';
+       });
+ }
+
+
+ function AccountCheck()
+  {
+   var chk = false;
+   if (document.getElementById("_username").value=='')
+    {
+    ShowErrorMsg('InvalidUsername') ;
+
+    }
+
+   else if (document.getElementById("_prepaidcode").value=='')
+   {
+   ShowErrorMsg('InvalidCode')
+   }
+   else
+   chk=true;
+   return(chk);
+  }
+
+   //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+    /*]]>*/
+
+
+
+        </script>
+</head>
+
+<body>
+<div class="AccountHeaderPage">
+ <div class="FloatingTop">
+  <img  src="img\logo.png"  alt=""  />
+ </div>
+<div class="FloatingTop">
+     You can add credit to your account using a valid Prepaid-Code.
+</div>
+</div>
+
+<noscript>
+<div  class="AccountMsgPage AccountWarningPage">
+    This page need JavaScript. Please enable JavaScript in your browser.
+</div>
+</noscript>
+
+<div  class="AccountMsgPage AccountInfoPage" id="InfoMsg" style="display:None">
+ &nbsp;
+</div>
+
+
+<div  class="AccountMsgPage AccountErrorPage" id="ErrorMsg" style="display:None">
+ &nbsp;
+</div>
+
+<div class="AccountPage">
+  <form  action="./" method="post"  onsubmit="return AccountCheck();">
+  <div><input type="hidden" name="_action" value="addmoneytoaccount" /></div>
+   <table>
+     <tr>
+         <td><label >User name</label></td>
+         <td><input tabindex="1"  name="_username"  id="_username" value="" autocomplete="off" type="text"  style="width:99%;height:16px;"/></td>
+
+     </tr>
+     <tr>
+         <td><label >Password</label></td>
+         <td><input tabindex="2"  name="_password" id="_password" value="" autocomplete="off" type="password"  style="width:99%;height:16px;"/></td>
+
+     </tr>
+     <tr>
+         <td><label >Prepaid-Code</label></td>
+         <td><input tabindex="3"  name="_prepaidcode"  id="_prepaidcode" value="" autocomplete="off" type="text"  style="width:99%;height:16px;"/></td>
+
+     </tr>
+
+
+     <tr>
+         <td><label >&nbsp;</label></td>
+         <td align="center"><input  class="LoginBtn" value="Redeem" type="submit" /></td>
+
+     </tr>
+   </table>
+   </form>
+
+</div>
+
+
+<div style="display: none;">
+
+   <p id="InvalidUsernameMsg">The entered user name is invalid. Please try again.</p>
+   <p id="InvalidPasswordMsg">The entered password is invalid. Please try again.</p>
+   <p id="InvalidCodeMsg">The entered Prepaid-Code is invalid. Please try again.</p>
+   <p id="NoMinCreditMsg">Your credit is not enough. Please add credit.</p>
+   <p id="DisabledUseraccountMsg">Your account is disabled. Please contact the service staff</p>
+   <p id="ExpiredUseraccountMsg">Your account is expired. Please contact  the service staff.</p>
+   <p id="UseraccountInUseMsg">Your account is currently acive at one of the terminals. Please contact  the service staff.</p>
+   <p id="DisabledCodeaccountMsg">The entered Prepaid-Code is disabled. Please contact the service staff.</p>
+   <p id="ExpiredCodeaccountMsg">The entered Prepaid-Code is expired. Please contact  the service staff.</p>
+   <p id="CodeaccountInUseMsg">The entered Prepaid-Code is currently acive at one of the terminals. Please contact  the service staff.</p>
+   <p id="ZeroCodeCreditMsg">The Code-credit is used up.</p>
+   <p id="UsernameExistsMsg">This user name is already taken. Please try a different user name.</p>
+   <p id="DisabledServiceMsg">Sorry, this service is not currently available. Please try again later.</p>
+   <p id="PayPalyLoginErrMsg">An error occurred while trying to log in. Please contact the service staff.</p>
+   <p id="InvalidPasswordConfirmMsg">Both passwords need to be the same. Please enter them again.</p>
+   <p id="InvalidNewUsernameMsg">The entered user name is empty. Please enter a valid username.</p>
+   <p id="InvalidNewPasswordMsg">The entered password is empty. Please enter a valid password.</p>
+   <p id="SuccessAddMoneyMsg">Thank you. The credit on your prepaid-Code has been added to your account.</p>
+   <p id="SuccessCreateAccountMsg">We thank you for your trust. Your account has been created successfully.</p>
+   <p id="SuccessChangePasswordMsg">Your password was successfully changed.</p>
+
+</div>
+
+
+</body>
+</html>

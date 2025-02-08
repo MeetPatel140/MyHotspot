@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MyHotspot - Seu login</title>
+        <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+        <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+        <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.3.pack.js"></script>
+        <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.3.css" media="screen" />
+        <script type="text/javascript"  src="lib-1-4-3.js"></script>
+        <link rel="stylesheet"  type="text/css"  href="style.css" />
+<script type="text/javascript">
+         /*<![CDATA[*/
+
+function ShowErrorMsg(Error)
+{
+          $(document).ready(function() {
+
+                       $("#WarningDlg").fancybox({
+                                'titlePosition'               : 'inside',
+                                'transitionIn'                : 'none',
+                                'transitionOut'               : 'none',
+                                'hideOnContentClick'          : false,
+                                'hideOnOverlayClick'          :false
+                                //'overlayShow'                 : false
+
+                         });
+                         document.getElementById("WarningDlgMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+                         $("#WarningDlg").click();
+                        });
+ }
+
+   var pp_MinAmount = 100;
+   var pp_MaxAmount =10000000;
+   var pp_Step = 50;
+   var pp_DecimalSeperator =".";
+
+  function GetAmountString(aCentsAmount) {
+     if(isNaN(aCentsAmount))
+      {
+       return "1.00"
+      }
+      else
+      {
+       var str =(aCentsAmount / 100) + ((aCentsAmount % 100 == 0) ? ".0" : "") + ((aCentsAmount % 10 == 0) ? "0" : "");
+
+       return str.replace(".", pp_DecimalSeperator);
+      }
+   }
+
+  function SetPayPalAmount(aAmount){
+     document.getElementById("PPamount").value=(isNaN(aAmount) ? "100":aAmount);
+     document.getElementById("DisplayAmount").firstChild.data=GetAmountString(aAmount);
+   }
+
+  function OnPPBtnClick(btn) {
+        var amount=100;
+       if (btn==1)
+        {
+        amount = Math.min(parseInt(document.getElementById("PPamount").value) + pp_Step, pp_MaxAmount) ;
+        }
+       else if (btn==2)
+       {
+        amount = Math.max(parseInt(document.getElementById("PPamount").value) - pp_Step, pp_MinAmount);
+       }
+
+       SetPayPalAmount(amount);
+
+      }
+
+
+   function toggleCheckbox(element)
+    {
+     document.getElementById("_freewifibtn").disabled = !element.checked;
+    }
+
+   function DisplayFlatTarif()
+                          {
+
+                              $(document).ready(function() {
+                                    try
+                                   {
+                                    document.getElementById("_flatprice").firstChild.data='';
+                                    var PricingIndex=document.getElementById("_flatpricing").options[document.getElementById("_flatpricing").selectedIndex].value;
+                                    document.getElementById("_flatprice").firstChild.data=document.getElementById("price"+"_"+PricingIndex).firstChild.data;
+                                    }
+                                    catch(err)
+                                   {
+                                   }
+
+                              });
+                          }
+
+
+ $(document).ready(function() {
+
+                       $("#TermsOfUse").fancybox({
+                                'titlePosition'                : 'inside',
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'hideOnContentClick'          : false,
+                                 'hideOnOverlayClick'          :false
+                                //'overlayShow': false ,
+                               });
+
+                         $("#TermsOfUse1").fancybox({
+                                'titlePosition'                : 'inside',
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'hideOnContentClick'          : false,
+                                 'hideOnOverlayClick'          :false
+                                //'overlayShow': false ,
+                               });
+
+                       $("#_changepassword").fancybox({
+                                'width'                                : '90%',
+                                'height'                        : '100%',
+                                'autoScale'                        : false,
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'type'                                : 'iframe'
+                        });
+
+                        $("#_addmoney").fancybox({
+                                'width'                                : '90%',
+                                'height'                        : '100%',
+                                'autoScale'                        : false,
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'type'                                : 'iframe'
+                        });
+
+                        $("#_createaccount").fancybox({
+                                'width'                                : '90%',
+                                'height'                        : '100%',
+                                'autoScale'                        : false,
+                                'transitionIn'                : 'none',
+                                'transitionOut'                : 'none',
+                                'type'                                : 'iframe'
+                        });
+                        
+                        
+                        SetPayPalAmount(pp_MinAmount);
+                          });
+                          //6F143793-ACE5-4C04-93EA-C593CD76DC47
+    /*]]>*/
+
+        </script>
+
+</head>
+
+<body>
+ 
+<div class="HeaderPage">
+ <div class="FloatingTop">
+  <img  src="img\logo.png"  alt="myhotspot" />
+ </div>
+<div class="FloatingTop">
+     True Software Hotspot
+</div>
+     <div class="PopupMenuBar" style="margin-top:8px;margin-bottom:-6px">
+     <div class="PopupMenu">
+      <a  class="PopupMenuItem"  style="background-image:url('img/pt.png');" >Português</a>
+
+      <div  class="PopupSubItems Hidden" >
+       <ul >
+          <li >
+     <a  style="background-image:url('img/de.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=de">Deutsch</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/en.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=en">English</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/es.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=es">Español</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/fr.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=fr">Français</a>
+ </li>
+         
+
+<li >
+     <a  style="background-image:url('img/ru.png');"   href="6A247235-3003-40E6-8D65-A58F0B7A4C70=ru">Русский</a>
+ </li>
+         
+
+
+       </ul>
+    </div>
+  </div>
+
+<script type="text/javascript">
+         /*<![CDATA[*/
+      $(document).ready(function() {
+          $('.PopupMenuItem').click(function(){
+                $(this).parent().find('.PopupSubItems').toggleClass('Hidden');
+               });
+         $('.PopupMenu').mouseleave(function() {
+            $(this).find('.PopupSubItems').addClass('Hidden');
+          });
+        });
+      /*]]>*/
+</script>
+</div>
+
+</div>
+<noscript>
+  <div  class="WarningPage">
+    <p class="WarningPageMsg">Esta p&aacute;gina necessita do Javascript. Ative o JavaScript no seu navegador.</p>
+  </div>
+ </noscript>
+
+<div class="Pages">
+  <div class="PageLeft">
+        <div class="PageLogin">
+       <div class="PageLoginHeader">
+            Conta de usu&aacute;rio
+      </div>
+      <div class="PageLoginCenter LoginCenterDefault" >
+           <div class="PageLoginLogo PageLoginLogoUser" >
+              <div class="PageLoginLogoText">
+                Voc&ecirc; pode fazer login usando seu nome de usu&aacute;rio e senha:
+              </div>
+           </div>
+           <div class="PageLoginData">
+            <form  action="./"  method="post" >
+                    <div><input type="hidden" name="_action" value="userlogin" /></div>
+                   <table>
+                      <tr>
+                         <td><label >Nome de usu&aacute;rio:</label></td>
+                         <td><input tabindex="1"  name="_user"  value="" autocomplete="off" type="text"  style="width:99%;height:16px;"/></td>
+                      </tr>
+                        <tr>
+                          <td><label>Senha:</label></td>
+                          <td><input tabindex="2"   name="_pass"  autocomplete="off" type="password" style="width:99%;height:16px;"/></td>
+                        </tr>
+                        <tr>
+                         <td>&nbsp;</td>
+                         <td>
+                           <div class="floatLeft">
+                               <input tabindex="3" class="LoginBtn" value="Login" type="submit"  />
+                           </div>
+
+                               <div class="floatRight">
+      <ul class="listStyleNone inlineList">
+         <li id="menu_item_0" class="menuItem positionRelative " onmouseover="onItem(this, 'menu_item')" onmouseout="outItem(this, 'menu_item')">
+           <input tabindex="4" class="OptionsBtn" value="Opções" type="button" />
+            <div class="subMenu positionAbsolute">
+              <a class="nowrap"   href="changepassword.html"  target="_blank">Alterar sua senha</a>
+
+              <a class="nowrap"  href="addmoney.html"   target="_blank">Adicionar crédito</a>
+
+              <a class="nowrap"  href="createaccount.html"  target="_blank">Criar uma conta de usuário</a>
+
+              <a class="nowrap"  href="userflat.html"   target="_blank">Comprar Flatrate</a>
+
+              
+            </div>
+          </li>
+         </ul>
+  </div>
+
+                          </td>
+                        </tr>
+
+                      </table>
+                   </form>
+           </div>
+      </div>
+
+    </div>
+
+    <div  class="PageLogin">
+     <div class="PageLoginHeader">
+            C&oacute;digo Pr&eacute;-pago
+      </div>
+      <div class="PageLoginCenter LoginCenterDefault" >
+           <div class="PageLoginLogo PageLoginLogoCode" >
+              <div class="PageLoginLogoText">
+                Voc&ecirc; pode fazer login usando o seu C&oacute;digo Pr&eacute;-pago v&aacute;lido:
+              </div>
+           </div>
+           <div class="PageLoginData">
+              <form  action="./"  method="post" >
+                    <div><input type="hidden" name="_action" value="codelogin" /></div>
+                  <table>
+
+                    <tr>
+                       <td><label>C&oacute;digo Pr&eacute;-pago:</label> </td>
+                       <td><input tabindex="4"    name="_code"   value="" autocomplete="off" type="text" style="width:99%;height:16px;"/></td>
+                    </tr>
+                    <tr>
+                       <td >&nbsp;</td>
+                       <td>
+                         <div class="floatLeft">
+                          <input tabindex="5" class="LoginBtn" value="Login" type="submit"  />
+                        </div>
+
+                         <div class="floatRight">
+      <ul class="listStyleNone inlineList">
+         <li id="menu_item_1" class="menuItem positionRelative " onmouseover="onItem(this, 'menu_item')" onmouseout="outItem(this, 'menu_item')">
+           <input tabindex="4" class="OptionsBtn" value="Opções" type="button" />
+            <div class="subMenu positionAbsolute">
+                <a class="nowrap"  href="codeflat.html"   target="_blank">Comprar Flatrate</a>
+
+                <a class="nowrap"   href="getcode.html"  target="_blank">Obter PIN-Code por SMS</a>
+
+            </div>
+          </li>
+         </ul>
+  </div>
+
+
+
+                       </td>
+                    </tr>
+
+                  </table>
+              </form>
+           </div>
+      </div>
+  </div>
+
+  </div>
+ 
+   <div class="PageLeft">
+    <div  class="PageLogin">
+     <div class="PageLoginHeader">
+            WiFi grátis
+      </div>
+      <div class="PageLoginCenter LoginCenterFreeWifi" >
+           <div class="PageLoginLogo PageLoginLogoFreeWifi" >
+              <div class="PageLoginLogoText">
+                Você pode fazer login grátis a aceitar os nossos Termos de Uso:
+              </div>
+           </div>
+           <div class="PageLoginData">
+              <form  action="./"  method="post" >
+               <div><input type="hidden" name="_action" value="freelogin" /></div>
+                <div class="FreeWifiTaC">
+            <table>
+             <tr>
+             <td style="width:1px">
+              <input type="checkbox" onchange="toggleCheckbox(this)"/>
+             </td>
+
+              <td style="padding-left:5px">
+                Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos <a  id="TermsOfUse1"  href="#_TermsOfUse">Termos de Uso</a>
+              </td>
+             </tr>
+            </table>
+             <input tabindex="7"  id="_freewifibtn" class="LoginBtn" value="Login" type="submit"  style="margin-top:5px" disabled/>
+           </div>
+           
+
+              </form>
+           </div>
+      </div>
+
+</div>
+
+    <div  class="PageLogin">
+     <div class="PageLoginHeader">
+            PayPal
+      </div>
+      <div class="PageLoginCenter LoginCenterPayPal" >
+           <div class="PageLoginLogo PageLoginLogoPayPal" >
+              <div class="PageLoginLogoText">
+                Por favor insira o valor desejado e clique no bot&atilde;o Login.
+              </div>
+           </div>
+           <div class="PageLoginData">
+
+             <form  action="./"  method="post" >
+              <div><input type="hidden" name="_action" value="pplogin" />
+              <input id="PPamount" type="hidden" name="_amount" value="100" /></div>
+               <table>
+               <tr>
+               <td><label>Valor:</label></td>
+               <td>
+               <div  class="DisplayPP">
+                       <div class="DisplayM DisplayppCurrency">€</div>
+                       <div id="DisplayAmount" class="DisplayM DisplayppAmount" style="width:140px">1.00</div>
+                       <div class="DisplayBtns">
+                          <div  class="DisplayBtn DisplayUpBtn" onclick="OnPPBtnClick(1)" ></div>
+                          <div  class="DisplayBtn DisplayDownBtn" onclick="OnPPBtnClick(2)"></div>
+                      </div>
+                 </div>
+                </td>
+                </tr>
+
+                <tr>
+                       <td ></td>
+                       <td><input tabindex="8" class="LoginBtn" value="Login" type="submit"  /></td>
+                </tr>
+                 </table>
+               </form>
+
+           </div>
+      </div>
+</div>
+
+  </div>
+ 
+  <div class="PageLeft">
+    <div  class="PageLogin">
+     <div class="PageLoginHeader">
+           Websites gr&aacute;tis
+      </div>
+      <div class="PageLoginCenter LoginCenterFreeLinks" >
+           <div class="PageLoginLogo PageLinksLogo" >
+              <div class="PageLoginLogoText">
+                Voc&ecirc; pode usar os seguintes sites de gra&ccedil;a:
+              </div>
+           </div>
+           <div class="PageLoginData">
+            <table>
+                <tr>
+                     <td>
+                       <a  href="http://myhotspot-software.com">MyHotspot Software</a>
+                     </td>
+                   </tr>
+
+
+            </table>
+           </div>
+      </div>
+  </div>
+
+    
+  </div>
+</div>
+   <div class="Footer">
+      Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos <a id="TermsOfUse" href="#_TermsOfUse">Termos de Uso</a>
+</div>
+
+
+<div style="display: none;">
+   <p id="InvalidUsernameMsg">O nome de usu&aacute;rio digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+   <p id="InvalidPasswordMsg">A senha digitada &eacute; inv&aacute;lida. Por favor, tente de novo.</p>
+   <p id="InvalidCodeMsg">O C&oacute;digo pr&eacute;-pago digitado &eacute; inv&aacute;lido. Por favor, tente de novo.</p>
+   <p id="NoMinCreditMsg">O seu cr&eacute;dito n&atilde;o &eacute; suficiente. Por favor, adicione cr&eacute;dito.</p>
+   <p id="DisabledUseraccountMsg">Sua conta est&aacute; desativada. Entre em contato com a equipe de servi&ccedil;o</p>
+   <p id="ExpiredUseraccountMsg">Sua conta expirou. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="UseraccountInUseMsg">Sua conta est&aacute; atualmente ativa em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="DisabledCodeaccountMsg">O C&oacute;digo pr&eacute;-pago digitado est&aacute; desativado. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="ExpiredCodeaccountMsg">O C&oacute;digo Pr&eacute;-pago digitado &eacute; expirado. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="CodeaccountInUseMsg">O C&oacute;digo Pr&eacute;-pago digitado est&aacute; atualmente ativo em um dos terminais. Entre em contato com a equipe de servi&ccedil;o.</p>
+   <p id="ZeroCodeCreditMsg">O C&oacute;digo de cr&eacute;dito foi utilizado.</p>
+   <p id="UsernameExistsMsg">Esse nome de usu&aacute;rio j&aacute; existe. Por favor tente um nome de usu&aacute;rio diferente.</p>
+   <p id="DisabledServiceMsg">Desculpe, este servi&ccedil;o n&atilde;o est&aacute; dispon&iacute;vel no momento. Por favor, tente de novo mais tarde.</p>
+   <p id="PayPalyLoginErrMsg">Um erro ocorreu ao tentar para entrar. Entre em contato com a equipe de servi&ccedil;o.</p>
+</div>
+
+<div style="display: none;">
+   <div id="_TermsOfUse" style="width:787px;height:400px;overflow:auto;font-size:14px">
+   <p><b>Termos de Uso</b></p>
+
+
+<br/><p><b>1.</b><br/>
+O uso &eacute; poss&iacute;vel ap&oacute;s o registro usando o formul&aacute;rio de inscri&ccedil;&atilde;o. O usu&aacute;rio assegura que todas as informa&ccedil;&otilde;es est&atilde;o completas e corretas. O operador n&atilde;o pode garantir a disponibilidade real do acesso &agrave; Internet.
+</p>
+
+<br/><p><b>2.</b><br/>
+O uso &eacute; fornecido com as possibilidades t&eacute;cnicas existentes. Em particular, o usu&aacute;rio n&atilde;o tem o direito de usar a internet de uma forma particular ou por um determinado per&iacute;odo.
+</p>
+
+<br/><p><b>3.</b><br/>
+Qualquer responsabilidade, especialmente para garantia e danos (com exce&ccedil;&atilde;o de inten&ccedil;&atilde;o e de danos pessoais) s&atilde;o exclu&iacute;dos. Al&eacute;m disso, o operador n&atilde;o se responsabiliza pelo conte&uacute;do de sites acessados e arquivos baixados ou por poss&iacute;vel infec&ccedil;&atilde;o por v&iacute;rus durante o uso da internet. O usu&aacute;rio reconhece saber que o operador oferece acesso exclusivo &agrave; internet, mas nenhuma prote&ccedil;&atilde;o contra v&iacute;rus ou firewall.
+</p>
+
+<br/><p><b>4.</b><br/>
+N&atilde;o &eacute; permitido publicar conte&uacute;dos ilegais ou legalmente protegidas.
+</p>
+
+<br/><p><b>5.</b><br/>
+&Eacute; expressamente proibido usar a internet para baixar ou distribuir de qualquer forma que seja conte&uacute;dos protegidos por direitos autorais.
+</p>
+
+<br/><p><b>6.</b><br/>
+Qualquer uso indevido da Internet, especialmente da utiliza&ccedil;&atilde;o que pode trazer consequ&ecirc;ncias legais para o operador ou de terceiros, &eacute; proibido.
+</p>
+
+<br/><p><b>7.</b><br/>
+Se o operador tem que transferir a t&iacute;tulo de presta&ccedil;&otilde;es do seguro a terceiros devido &agrave;s atividades do usu&aacute;rio, o usu&aacute;rio &eacute; obrigado a indenizar e isentar o operador inocente em rela&ccedil;&atilde;o aos processos judiciais e reclama&ccedil;&otilde;es.
+</p>
+
+<br/><p><b>8.</b><br/>
+No caso de viola&ccedil;&atilde;o destes termos de utiliza&ccedil;&atilde;o ou suspeita o operador se reserva o direito de bloquear a conta, sem dar raz&otilde;es. N&oacute;s n&atilde;o assumimos responsabilidade por perda de dados.
+</p>
+
+<br/><p><b>9.</b><br/>
+As informa&ccedil;&otilde;es solicitadas servem como verifica&ccedil;&atilde;o, de modo que o abuso &agrave; Internet pode ser evitado. Al&eacute;m disso, usamos as informa&ccedil;&otilde;es geogr&aacute;ficas e estat&iacute;sticas para melhorar o nosso servi&ccedil;o e de nossos patrocinadores. N&oacute;s garantimos que a informa&ccedil;&atilde;o pessoal &eacute; usada apenas internamente e n&atilde;o ser&atilde;o transmitidas a terceiros sem permiss&atilde;o.
+</p>
+
+<br/><p><b>10.</b><br/>
+Se alguma disposi&ccedil;&atilde;o destes termos de uso &eacute; ou se torna ilegal, inv&aacute;lida ou inexeq&uuml;&iacute;vel em qualquer jurisdi&ccedil;&atilde;o, isso n&atilde;o prejudica.
+</p>
+
+
+   </div>
+</div>
+
+<div style="display: none;">
+                 <div id="_WarningDlg" style="width:353px;height:181px;overflow:auto;">
+                    <div class="alignCenter"  style="float:left;width:55px" >
+                       <img  src="img/warning.jpg" style="margin-top:72px;"  alt="myhotspot" />
+                    </div>
+                    <div style="float:right;width:298px">
+                       <p id="WarningDlgMsg"  style="margin-top:72px;margin-left:5px;font-size:12px;font-weight : bold;">Msg</p>
+                    </div>
+                </div>
+</div>
+
+<div style="display: none;">
+      <a id="WarningDlg" href="#_WarningDlg"/>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<title>MyHotSpot - Información sobre el Estado</title>
+<script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+<link rel="stylesheet"  type="text/css"  href="style-mobile.css" />
+<script type="text/javascript">
+
+         /*<![CDATA[*/
+            playing=false;
+            resttime=0;
+            var hcounter;
+
+            function LogoutCheck()
+            {
+             var chk = window.confirm(document.getElementById("LogoutCheckMsg").firstChild.data);
+             return(chk);
+            }
+            function startcountdown(){
+            if (playing==false){
+            playing=true;
+            hcounter=setInterval("timer();",1000)
+                               }
+            }
+            function stopcountdown(){
+             if (playing==true)
+               {
+                clearInterval(hcounter);
+                playing=false;
+               }
+            }
+            function timer(){
+            if(resttime>0){
+            resttime--;
+            rest=resttime;
+            hours=0;
+            minutes=0;
+            seconds=0;
+
+
+            if (rest >= 3600)
+              {
+               hours=Math.floor(rest/3600);
+               rest = rest-hours*3600;
+              }
+            if (rest >= 60)
+              {
+               minutes=Math.floor(rest/60);
+               rest = rest-minutes*60;
+              }
+            seconds=rest;
+
+            countdowntext="00:00:00";
+            if (hours < 10)
+             {
+             countdowntext = "0"+hours+":";
+             }
+
+            else
+              {
+             countdowntext = hours+":";
+              }
+            if (minutes < 10)
+             {
+
+             countdowntext += "0"+minutes+":";
+            }
+            else
+             {
+
+             countdowntext += minutes+":";
+             }
+
+            if (seconds < 10)
+             {
+             countdowntext += "0"+seconds;
+             }
+            else
+             {
+             countdowntext += seconds;
+             }
+
+
+
+
+
+            document.getElementById("TimeDisplayText").firstChild.data=countdowntext;
+
+            }else{
+              stopcountdown();
+
+            }
+            }
+
+
+        function setRandom(){
+           return Math.round(Math.random()*(122-48))+48;
+       }
+
+       function createguid(z){
+          var chars = new Array();
+          var x=0;
+          var y=0;
+
+          while(chars.length!=z){
+              var num =  setRandom();
+              if((num>47 && num<58) || (num>65 && num<91) || (num>96 && num<123)){
+                  if((num>47 && num<58)&&(x<2)){
+                      chars.push(String.fromCharCode(num));
+                      x++;
+                  }else if(y<z-2){
+                      chars.push(String.fromCharCode(num));
+                      y++;
+                  }
+              }
+          }
+          return chars.join('');
+       }
+
+      function loadXML(dname)
+          {
+
+          var xmlHttpObject = false;
+
+          if (typeof XMLHttpRequest != 'undefined')
+          {
+              xmlHttpObject = new XMLHttpRequest();
+          }
+
+          if (!xmlHttpObject)
+          {
+              try
+              {
+                  xmlHttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+              }
+              catch(e)
+              {
+                  try
+                  {
+                      xmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  catch(e)
+                  {
+                      xmlHttpObject = null;
+                  }
+              }
+          }
+          xmlHttpObject.open("GET",dname,false);
+          xmlHttpObject.send(null);
+          return xmlHttpObject.responseText;
+          }
+
+
+         var sURL = unescape(window.location.pathname);
+         function refresh()
+          {
+           xmldata=loadXML("getsessiondata"+createguid(9));
+           if (xmldata != "")
+           {
+           if (xmldata=="nosession")
+           {
+            window.location.href = sURL;
+           }
+            else
+           {
+            data=xmldata.split("|");
+
+            resttime=data[0];
+            document.getElementById("CostDisplayText").firstChild.data=data[1];
+            startcountdown();
+           }
+           }
+          }
+
+
+           $(document).ready(function() {
+                            setTimeout("refresh();", 1000);
+                           setInterval("refresh();",60000);
+                             });
+
+
+
+        /*]]>*/
+
+</script>
+</head>
+<body>
+   <div class="wrap" >
+       <div class="PageTitle">
+         <div class="logo"><img src="img/logo-mobile.png" alt=""/></div>
+         <div class="logocaption">¡Ha iniciado sesión correctamente!</div>
+       <div class="CounterPage">
+         <div class="CounterHeader TimerHidden" >Tiempo restante</div>
+         <div class="CounterDisplay TimerHidden" id="TimeDisplayText">00:00:00 </div>
+         <div class="CounterHeader CreditHidden" >Saldo</div>
+         <div class="CounterDisplay CreditHidden" id="CostDisplayText">0.00</div>
+       </div>
+      <form  action="./" method="post" >
+        <div><input type="hidden" name="_action" value="logout" /></div>
+        <div><input type="submit" value="Terminar sesión"/></div>
+      </form>
+      
+
+    </div>
+  </div>
+
+<div style="display: none;">
+   <p id="LogoutCheckMsg">¿Seguro que quiere cerrar la sesión?</p>
+</div>
+</body>
+</html>

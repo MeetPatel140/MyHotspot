@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MyHotspot-Buy Flatrate</title>
+       <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+
+        <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.3.pack.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.3.css" media="screen" />
+
+        <script type="text/javascript"  src="lib-1-4-3.js"></script>
+
+        <link rel="stylesheet"  type="text/css"  href="style.css" />
+
+<script type="text/javascript">
+
+         /*<![CDATA[*/
+
+
+function DisplayFlatTarif()
+{
+
+   $(document).ready(function() {
+          try
+         {
+           document.getElementById("_description").firstChild.data='';
+           document.getElementById("_flatprice").firstChild.data='';
+           var PricingIndex=document.getElementById("_flatpricing").options[document.getElementById("_flatpricing").selectedIndex].value;
+           document.getElementById("_description").firstChild.data=document.getElementById("description"+"_"+PricingIndex).firstChild.data;
+           document.getElementById("_flatprice").firstChild.data=document.getElementById("price"+"_"+PricingIndex).firstChild.data;
+          }
+         catch(err)
+         {
+         }
+
+       });
+}
+
+
+function ShowErrorMsg(Error)
+
+{
+
+        $(document).ready(function() {
+          document.getElementById("ErrorMsg").firstChild.data=document.getElementById(Error+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'none';
+          document.getElementById("ErrorMsg").style.display = 'block';
+       });
+ }
+
+function ShowInfoMsg(Info)
+
+{
+        $(document).ready(function() {
+          document.getElementById("InfoMsg").firstChild.data=document.getElementById(Info+"Msg").firstChild.data;
+          document.getElementById("InfoMsg").style.display = 'block';
+       });
+ }
+
+
+ function AccountCheck()
+  {
+   var chk = false;
+  if (document.getElementById("_code").value=='')
+   {
+   ShowErrorMsg('InvalidCode')
+   }
+   else
+   chk=true;
+   return(chk);
+  }
+
+  $(document).ready(function() {
+                           DisplayFlatTarif();
+                          });
+
+   //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+    /*]]>*/
+
+
+
+        </script>
+</head>
+
+<body>
+<div class="AccountHeaderPage">
+ <div class="FloatingTop">
+  <img  src="img\logo.png" alt="" />
+ </div>
+<div class="FloatingTop">
+     Buy Flatrate
+</div>
+</div>
+
+<noscript>
+<div  class="AccountMsgPage AccountWarningPage">
+    This page need JavaScript. Please enable JavaScript in your browser.
+</div>
+</noscript>
+
+<div  class="AccountMsgPage AccountInfoPage" id="InfoMsg" style="display:None">
+&nbsp;
+</div>
+
+
+<div  class="AccountMsgPage AccountErrorPage" id="ErrorMsg" style="display:None">
+&nbsp;
+</div>
+
+<div class="AccountPage">
+  <form  action="./" method="post"  onsubmit="return AccountCheck();">
+  <div><input type="hidden" name="_action" value="codeflatlogin" /></div>
+   <table>
+     <tr>
+       <td style="width:30%;"><label >Your Flatrate tarif:</label></td>
+       <td>
+        <select name="_flatpricing" id="_flatpricing" onchange="DisplayFlatTarif()"  style="width:99%;">
+          <option  value="464C1BA4-6626-437B-A7D1-6D673F43A4CE" >1GB for 1-Day (Limited Plan)</option> 
+
+<option  value="4B4FC7AA-D554-4994-9370-3A28D6363372" >5GB for 1-Day (Limited Plan)</option> 
+
+<option  value="2F26F6C5-8D77-4CC2-A3D6-AC0BE7B9E575" >Unlimited GB for 1-Day (Unlimited Plan)</option> 
+
+<option  value="70DB4627-E276-4B7B-BD7C-A4311563ED40" >Unlimited GB for 1-Week (Unlimited Plan)</option> 
+
+<option  value="D6920214-D989-4DC9-800A-E4DDCAAC7BE0" >Unlimited GB for 1-Month (Unlimited Plan)</option> 
+
+<option  value="0CA67EA8-C2B4-41B7-BB6A-7F07BA2C63A0" >1 Hour Unlimited (Testing)</option> 
+
+
+        </select>
+       </td>
+     </tr>
+     <tr>
+         <td><label >Description:</label></td>
+         <td><label id="_description">&nbsp;</label></td>
+
+     </tr>
+
+     <tr>
+         <td><label >Flat Price:</label></td>
+         <td><label id="_flatprice">&nbsp;</label></td>
+
+     </tr>
+     
+     <tr>
+          <td><label>Prepaid-Code:</label> </td>
+          <td><input tabindex="4"    name="_code"    id="_code"   value="" autocomplete="off" type="text" style="width:99%;height:16px;"/></td>
+     </tr>
+     
+     
+
+
+     <tr>
+         <td><label >&nbsp;</label></td>
+         <td align="center"><input  class="LoginBtn" value="Login" type="submit" /></td>
+
+     </tr>
+   </table>
+   </form>
+
+</div>
+
+
+<div style="display: none;">
+
+   <p id="InvalidUsernameMsg">The entered user name is invalid. Please try again.</p>
+   <p id="InvalidPasswordMsg">The entered password is invalid. Please try again.</p>
+   <p id="InvalidCodeMsg">The entered Prepaid-Code is invalid. Please try again.</p>
+   <p id="NoMinCreditMsg">Your credit is not enough. Please add credit.</p>
+   <p id="DisabledUseraccountMsg">Your account is disabled. Please contact the service staff</p>
+   <p id="ExpiredUseraccountMsg">Your account is expired. Please contact  the service staff.</p>
+   <p id="UseraccountInUseMsg">Your account is currently acive at one of the terminals. Please contact  the service staff.</p>
+   <p id="DisabledCodeaccountMsg">The entered Prepaid-Code is disabled. Please contact the service staff.</p>
+   <p id="ExpiredCodeaccountMsg">The entered Prepaid-Code is expired. Please contact  the service staff.</p>
+   <p id="CodeaccountInUseMsg">The entered Prepaid-Code is currently acive at one of the terminals. Please contact  the service staff.</p>
+   <p id="ZeroCodeCreditMsg">The Code-credit is used up.</p>
+   <p id="UsernameExistsMsg">This user name is already taken. Please try a different user name.</p>
+   <p id="DisabledServiceMsg">Sorry, this service is not currently available. Please try again later.</p>
+   <p id="PayPalyLoginErrMsg">An error occurred while trying to log in. Please contact the service staff.</p>
+   <p id="InvalidPasswordConfirmMsg">Both passwords need to be the same. Please enter them again.</p>
+   <p id="InvalidNewUsernameMsg">The entered user name is empty. Please enter a valid username.</p>
+   <p id="InvalidNewPasswordMsg">The entered password is empty. Please enter a valid password.</p>
+   <p id="SuccessAddMoneyMsg">Thank you. The credit on your prepaid-Code has been added to your account.</p>
+   <p id="SuccessCreateAccountMsg">We thank you for your trust. Your account has been created successfully.</p>
+   <p id="SuccessChangePasswordMsg">Your password was successfully changed.</p>
+
+</div>
+
+<div style="display: none;">
+
+   <p id="description_464C1BA4-6626-437B-A7D1-6D673F43A4CE">Data Quata: 1GB,
+Validity: 1-Day,
+Plan Type: Limited,
+Speed: 500-800Mbps (Full Speed),
+Price: Rs.10.</p>
+
+<p id="price_464C1BA4-6626-437B-A7D1-6D673F43A4CE">Rs: 10.0000</p>
+
+<p id="description_4B4FC7AA-D554-4994-9370-3A28D6363372">Data Quata: 5GB,
+Validity: 1-Day,
+Plan Type: Limited,
+Speed: 500-800Mbps (Full Speed),
+Price: Rs.15.</p>
+
+<p id="price_4B4FC7AA-D554-4994-9370-3A28D6363372">Rs: 15.0000</p>
+
+<p id="description_2F26F6C5-8D77-4CC2-A3D6-AC0BE7B9E575">Data Quata: Unlimited GB,
+Validity: 1-Day,
+Plan Type: Unlimited,
+Speed: 500-800Mbps (Full Speed)
+Price: Rs.20.</p>
+
+<p id="price_2F26F6C5-8D77-4CC2-A3D6-AC0BE7B9E575">Rs: 20.0000</p>
+
+<p id="description_70DB4627-E276-4B7B-BD7C-A4311563ED40">Data Quata: Unlimited GB,
+Validity: 1-Week,
+Plan Type: Unlimited,
+Speed: 500-800Mbps (Full Speed)
+Price: Rs.50.</p>
+
+<p id="price_70DB4627-E276-4B7B-BD7C-A4311563ED40">Rs: 50.0000</p>
+
+<p id="description_D6920214-D989-4DC9-800A-E4DDCAAC7BE0">Data Quata: Unlimited GB,
+Validity: 1-Month,
+Plan Type: Unlimited,
+Speed: 500-800Mbps (Full Speed),
+Price: Rs.100.</p>
+
+<p id="price_D6920214-D989-4DC9-800A-E4DDCAAC7BE0">Rs: 100.0000</p>
+
+<p id="description_0CA67EA8-C2B4-41B7-BB6A-7F07BA2C63A0">1 Hour Unlimited (Testing)</p>
+
+<p id="price_0CA67EA8-C2B4-41B7-BB6A-7F07BA2C63A0">Rs: 0.0000</p>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>
