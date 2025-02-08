@@ -13,7 +13,7 @@ http://www.my-cybercafe.com
 <meta name="format-detection" content="telephone=no" />
 <meta name="HandheldFriendly" content="True" />
 <meta name="MobileOptimized" content="320" />
-<title>MyHotspot- Add Credit</title>
+<title>MyHotspot-Get Prepaid-Code</title>
 <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
 <link rel="stylesheet"  type="text/css"  href="style-mobile.css" />
 <script type="text/javascript">
@@ -44,36 +44,46 @@ function ShowInfoMsg(Info)
    function AccountCheck()
   {
    var chk = false;
-   if (document.getElementById("_username").value=='')
+   if ( (document.getElementById("_countrycode").value=='')
+             || (document.getElementById("_localphone").value=='') )
     {
-    ShowErrorMsg('InvalidUsername') ;
+    ShowErrorMsg('InvalidPhone') ;
 
     }
 
-   else if (document.getElementById("_prepaidcode").value=='')
-   {
-   ShowErrorMsg('InvalidCode')
-   }
    else
    chk=true;
    return(chk);
   }
 
-   //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+  function PhoneChange()
+  {
+     var chk = true;
+    $(document).ready(function() {
+
+        document.getElementById("_phone").firstChild.data="+"+document.getElementById("_countrycode").value+" "
+                                                            +document.getElementById("_localphone").value;
+
+       });
+
+   return(chk);
+  }
+
+
+  //6F143793-ACE5-4C04-93EA-C593CD76DC47
 
     /*]]>*/
 
-
-
         </script>
-</head>
 
+</head>
 <body>
 
-<div class="wrap" >
+   <div class="wrap" >
        <div class="PageTitle">
          <div class="logo"><img src="img/logo-mobile.png" alt=""/></div>
-         <div class="logocaption">You can add credit to your account using a valid Prepaid-Code.</div>
+         <div class="logocaption">Get Prepaid-Code by SMS</div>
        </div>
 
        <div class="NewPage" id="ErrorMsgDisplay" style="display: none;">
@@ -95,30 +105,32 @@ function ShowInfoMsg(Info)
      </noscript>
 
      <div class="NewPage">
-       <form  action="./" method="post"  onsubmit="return AccountCheck();">
-       <div><input type="hidden" name="_action" value="addmoneytoaccount" /></div>
-        <div>
-          <label >User name</label>
-          <input tabindex="1"  name="_username"  id="_username" value="" autocomplete="off" type="text"  />
+     <div class="PageInfoText">
+           Please enter your country code (Example:44) and your mobile phone number (Example:07123456 or 7123456) to receive your PIN-Code by SMS.
+      </div>
+
+    <form  action="./" method="post"  onsubmit="return AccountCheck();">
+     <div> <input type="hidden" name="_action" value="getcode" /></div>
+       <div>
+          <label >Country code</label>
+          <input  class="Width50"   tabindex="2"  name="_countrycode"  id="_countrycode" value="" autocomplete="off" type="text"   onkeyup="PhoneChange();" onchange="PhoneChange();" />
         </div>
         <div>
-            <label >Password</label>
-            <input tabindex="2"  name="_password" id="_password" value="" autocomplete="off" type="password"  />
-        </div>
-        <div>
-            <label >Prepaid-Code</label>
-            <input tabindex="3"  name="_prepaidcode"  id="_prepaidcode" value="" autocomplete="off" type="text"  />
-        </div>
-        <div>
-          <input   value="Redeem" type="submit" />
-        </div>
-       </form>
-     </div>
+         <label >Phone number <span class="PhoneDisplay"   id="_phone" >+</span></label>
+         <input tabindex="3"  name="_localphone"  id="_localphone"  value="" autocomplete="off" type="text"  onkeyup="PhoneChange();" onchange="PhoneChange();"/>
+       </div>
+
+      
+
+      <div>
+         <input   value="Send" type="submit" />
+      </div>
+   </form>
+  </div>
+ </div>
 
 
-</div>
-
-  <div style="display: none;">
+<div style="display: none;">
 
    <p id="InvalidUsernameMsg">The entered user name is invalid. Please try again.</p>
    <p id="InvalidPasswordMsg">The entered password is invalid. Please try again.</p>
@@ -140,8 +152,10 @@ function ShowInfoMsg(Info)
    <p id="SuccessAddMoneyMsg">Thank you. The credit on your prepaid-Code has been added to your account.</p>
    <p id="SuccessCreateAccountMsg">We thank you for your trust. Your account has been created successfully.</p>
    <p id="SuccessChangePasswordMsg">Your password was successfully changed.</p>
+   <p id="InvalidPhoneMsg">The entered country code or mobile phone number is invalid. Please try again.</p>
+   <p id="InvalidFormDataMsg">You must fill in all form fields</p>
+   <p id="IncorrectCaptchaMsg">The entered security code is Incorrect. Please try again.</p>
 
 </div>
-
 </body>
 </html>

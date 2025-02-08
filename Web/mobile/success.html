@@ -11,7 +11,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <title>MyHotSpot - Session Information</title>
+  <title>Logged-in Succesfully. Enjoy!</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
   <!-- Local Font Awesome -->
   <link rel="stylesheet" href="../css/all.min.css">
@@ -208,9 +208,28 @@
       width: calc(100% + 40px);
       margin-left: -20px;
     }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("year").textContent = new Date().getFullYear();
+    });
+
     let playing = false;
     let resttime = 0;
     let hcounter;
@@ -298,7 +317,8 @@
   <div class="wrap">
     <div class="PageTitle">
       <div class="logo"><img src="img/logo-mobile.png" alt="MyHotspot Logo"></div>
-      <div class="logocaption">You have logged-in successfully!</div>
+      <strong style="font-size: 1.5em;">You have logged-in successfully!</strong><br>
+      <div class="logocaption" style="margin-top: 0px;"><i class="fas fa-info-circle"></i> Keep this window open in background on your device, to avoid being kicked-out from your session.</div>
     </div>
 
     <!-- Box 1: Remaining Time and Balance -->
@@ -334,6 +354,10 @@
           </button>
         </form>
       </div>
+    </div>
+
+    <div class="footer">
+      &copy; <span id="year"></span> <a href="https://fusiontechlaboratories.in">FusionTech Laboratories</a>. All rights reserved.
     </div>
   </div>
 
