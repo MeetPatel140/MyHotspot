@@ -299,6 +299,89 @@
       text-decoration: none;
       font-weight: 500;
     }
+
+    /* Add this to your existing CSS */
+.NewPage#ErrorMsgDisplay {
+  display: none; /* Hidden by default */
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.MessagePageLogo.ErrorPage {
+  background-color: rgba(255, 99, 71, 0.2); /* Light red background */
+  border: 1px solid rgba(255, 99, 71, 0.8); /* Dark red border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Spacing inside the box */
+  color: white; /* White text */
+  font-size: 14px; /* Text size */
+  font-weight: 500; /* Medium font weight */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.2); /* Subtle shadow */
+}
+
+.MessagePageLogo.ErrorPage i {
+  color: #ff6347; /* Red icon color */
+  font-size: 16px; /* Icon size */
+}
+
+.NewPage#WarningMsgDisplay {
+  display: none; /* Hidden by default */
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.MessagePageLogo.WarningPage {
+  background-color: rgba(255, 165, 0, 0.2); /* Light orange background */
+  border: 1px solid rgba(255, 165, 0, 0.8); /* Dark orange border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Spacing inside the box */
+  color: white; /* White text */
+  font-size: 14px; /* Text size */
+  font-weight: 500; /* Medium font weight */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2); /* Subtle shadow */
+}
+
+.MessagePageLogo.WarningPage i {
+  color: #ffa500; /* Orange icon color */
+  font-size: 16px; /* Icon size */
+}
+
+.NewPage#InfoMsgDisplay {
+  display: none; /* Hidden by default */
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.MessagePageLogo.InfoPage {
+  background-color: rgba(30, 144, 255, 0.2); /* Light blue background */
+  border: 1px solid rgba(30, 144, 255, 0.8); /* Dark blue border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Spacing inside the box */
+  color: white; /* White text */
+  font-size: 14px; /* Text size */
+  font-weight: 500; /* Medium font weight */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2); /* Subtle shadow */
+}
+
+.MessagePageLogo.InfoPage i {
+  color: #1e90ff; /* Blue icon color */
+  font-size: 16px; /* Icon size */
+}
+
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
@@ -323,17 +406,28 @@
       });
     }
 
-    function AccountCheck() {
+    function AccountLoginCheck() {
       var chk = false;
-      if ($("#_username").val() === '') {
+      if ($("#_user").val() === '') {
         ShowErrorMsg('InvalidUsername');
-      } else if ($("#_prepaidcode").val() === '') {
+      } else if ($("#_pass").val() === '') {
+        ShowErrorMsg('InvalidPassword');
+      } else {
+        chk = true;
+      }
+      return chk;
+    }
+
+    function CodeLoginCheck() {
+      var chk = false;
+      if ($("#_code").val() === '') {
         ShowErrorMsg('InvalidCode');
       } else {
         chk = true;
       }
       return chk;
     }
+
   </script>
 </head>
 
@@ -350,16 +444,26 @@
     </div>
 
     <div class="NewPage hidden" id="ErrorMsgDisplay">
-      <div class="MessagePageLogo ErrorPage" id="ErrorMsg">&nbsp;</div>
+      <div class="MessagePageLogo ErrorPage" id="ErrorMsg">
+        <i class="fas fa-exclamation-circle"></i> <!-- Font Awesome icon -->
+        <span>Your error message will appear here.</span> <!-- Placeholder text -->
+      </div>
     </div>
-
+    
     <div class="NewPage hidden" id="WarningMsgDisplay">
-      <div class="MessagePageLogo WarningPage" id="WarningMsg">&nbsp;</div>
+      <div class="MessagePageLogo WarningPage" id="WarningMsg">
+        <i class="fas fa-exclamation-triangle"></i> <!-- Font Awesome icon -->
+        <span>Your warning message will appear here.</span> <!-- Placeholder text -->
+      </div>
     </div>
-
+    
     <div class="NewPage hidden" id="InfoMsgDisplay">
-      <div class="MessagePageLogo InfoPage" id="InfoMsg">&nbsp;</div>
+      <div class="MessagePageLogo InfoPage" id="InfoMsg">
+        <i class="fas fa-info-circle"></i> <!-- Font Awesome icon -->
+        <span>Your info message will appear here.</span> <!-- Placeholder text -->
+      </div>
     </div>
+    
 
     <noscript>
       <div class="NewPage">
@@ -374,7 +478,7 @@
       </div>
       <div class="divider"></div>
       <div class="box-content">
-        <form action="./" method="post">
+        <form action="./" method="post" onsubmit="return AccountLoginCheck();">
           <input type="hidden" name="_action" value="userlogin">
           <div style="margin-top: 15px;">
             <label for="_user">
@@ -404,13 +508,13 @@
       </div>
       <div class="divider"></div>
       <div class="box-content">
-        <form action="./" method="post">
+        <form action="./" method="post" onsubmit="return CodeLoginCheck();">
           <input type="hidden" name="_action" value="codelogin">
           <div style="margin-top: 15px;">
             <label for="_code">
               <i class="fas fa-ticket"></i> Voucher-Code:
             </label>
-            <input type="text" id="_code" name="_code" placeholder="Enter your Prepaid-Code" autocomplete="off" tabindex="4">
+            <input type="text" id="_code" name="_code" placeholder="Enter your Voucher-Code" autocomplete="off" tabindex="4">
           </div>
           <div>
             <button type="submit" tabindex="5">
@@ -491,18 +595,18 @@
   <div class="hidden">
     <p id="InvalidUsernameMsg"><i class="fas fa-exclamation-circle"></i> The entered username is invalid. Please try again.</p>
     <p id="InvalidPasswordMsg"><i class="fas fa-exclamation-circle"></i> The entered password is invalid. Please try again.</p>
-    <p id="InvalidCodeMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is invalid. Please try again.</p>
-    <p id="NoMinCreditMsg"><i class="fas fa-exclamation-circle"></i> Your credit is not enough. Please add credit.</p>
-    <p id="DisabledUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is disabled. Please contact the service staff.</p>
-    <p id="ExpiredUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is expired. Please contact the service staff.</p>
-    <p id="UseraccountInUseMsg"><i class="fas fa-exclamation-circle"></i> Your account is currently active at one of the terminals. Please contact the service staff.</p>
-    <p id="DisabledCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is disabled. Please contact the service staff.</p>
-    <p id="ExpiredCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is expired. Please contact the service staff.</p>
-    <p id="CodeaccountInUseMsg"><i class="fas fa-exclamation-circle"></i> The entered Prepaid-Code is currently active at one of the terminals. Please contact the service staff.</p>
-    <p id="ZeroCodeCreditMsg"><i class="fas fa-exclamation-circle"></i> The Code-credit is used up.</p>
+    <p id="InvalidCodeMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is invalid. Please try again.</p>
+    <p id="NoMinCreditMsg"><i class="fas fa-exclamation-circle"></i> Your Balance is not enough. Please add Money.</p>
+    <p id="DisabledUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is Disabled. Please contact the service staff.</p>
+    <p id="ExpiredUseraccountMsg"><i class="fas fa-exclamation-circle"></i> Your account is Expired. Please contact the service staff.</p>
+    <p id="UseraccountInUseMsg"><i class="fas fa-exclamation-circle"></i> Your account is currently Active on other devices. Either please wait for 10-Minutes or Please contact the service staff.</p>
+    <p id="DisabledCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is disabled. Please contact the service staff.</p>
+    <p id="ExpiredCodeaccountMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is expired. Please contact the service staff.</p>
+    <p id="CodeaccountInUseMsg"><i class="fas fa-exclamation-circle"></i> The entered Voucher-Code is currently Active on other Devices. Either please wait for 10-Minutes or Please contact the service staff.</p>
+    <p id="ZeroCodeCreditMsg"><i class="fas fa-exclamation-circle"></i> The Code-Money is used up.</p>
     <p id="UsernameExistsMsg"><i class="fas fa-exclamation-circle"></i> This username is already taken. Please try a different username.</p>
     <p id="DisabledServiceMsg"><i class="fas fa-exclamation-circle"></i> Sorry, this service is not currently available. Please try again later.</p>
-    <p id="PayPalyLoginErrMsg"><i class="fas fa-exclamation-circle"></i> An error occurred while trying to log in. Please contact the service staff.</p>
+    <p id="PayPalyLoginErrMsg"><i class="fas fa-exclamation-circle"></i> An error occurred while trying to log-in. Please contact the service staff.</p>
   </div>
 </body>
 </html>
